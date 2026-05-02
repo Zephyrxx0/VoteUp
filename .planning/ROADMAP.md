@@ -14,13 +14,13 @@ Goal: Implement the core data engine including ECI scraping, GPS mapping, and co
 **Requirements:** [DATA-01, SYNC-01, MAP-01, VAL-01, RPT-01, ADM-01]
 
 **Plans:**
-- [ ] 02-01-PLAN.md — Geo-Spatial Core (Turf.js + DataMeet)
-- [ ] 02-02-PLAN.md — ECI Scraper Engine (Playwright + PDF-Parse)
-- [ ] 02-03-PLAN.md — Cloud Sync & Firestore Persistence
-- [ ] 02-04-PLAN.md — Community Reporting & Resilience
-- [ ] 02-05-PLAN.md — Discovery UI (GPS & EPIC Search)
-- [ ] 02-06-PLAN.md — Admin Dashboard & Control
-- [ ] 02-07-PLAN.md — Resilience & Offline Fallback
+- [x] 02-01-PLAN.md — Backend TS Migration & Geo-Spatial Core
+- [x] 02-02-PLAN.md — ECI Scraper Engine (Playwright + PDF-Parse)
+- [x] 02-03-PLAN.md — Cloud Sync & Firestore Persistence
+- [x] 02-04-PLAN.md — Community Reporting & Consensus Logic
+- [x] 02-05-PLAN.md — Discovery UI (GPS & EPIC Search)
+- [x] 02-06-PLAN.md — Admin Dashboard & Data Control
+- [x] 02-07-PLAN.md — Offline Resilience & Fallback
 
 ### Phase 3: Personalized Action Layer
 Goal: checklist generation based on current stage and user profile.

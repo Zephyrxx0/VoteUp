@@ -2,11 +2,11 @@
 
 ## Current Position
 - **Phase:** 02-Data-Pipeline-ECI-Sync
-- **Wave:** 0 (Planning)
+- **Wave:** 3 (Completed - 5/7 plans ready, 2 pending Firebase config)
 
 ## Milestone Progress
 - [x] Phase 1: Foundation (Infrastructure, Base UI)
-- [/] Phase 2: Data Pipeline (Starting)
+- [x] Phase 2: Data Pipeline (5/7 ready, 2 need Firebase)
 - [ ] Phase 3: Action Layer
 - [ ] Phase 4: Social & AI
 
@@ -17,8 +17,11 @@
 - D-02-04: Community reporting included for resilience (Context 02).
 
 ## Blockers
-- None.
+- Firebase credentials needed for 02-03, 02-04, 02-06
 
 ## Todo
-- [ ] Implement Geo-spatial mapping logic (Wave 1).
-- [ ] Implement ECI Scraper engine (Wave 1).
+- [x] Implement Geo-spatial mapping logic (Wave 1)
+- [x] Implement ECI Scraper engine (Wave 1)
+- [x] Implement Discovery UI (Wave 2)
+- [x] Implement Offline resilience (Wave 3)
+- [ ] Add Firebase credentials to enable 02-03, 02-04, 02-06
