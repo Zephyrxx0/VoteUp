@@ -1,7 +1,14 @@
 import assert from 'node:assert/strict';
-import { describe, it, mock } from 'node:test';
-import * as firestore from 'firebase-admin/firestore';
-import { getStageCompletionCount } from '../services/db/pulse-store.ts';
+import { afterEach, describe, it, mock } from 'node:test';
+import {
+  __resetGetFirestoreForTest,
+  __setGetFirestoreForTest,
+  getStageCompletionCount,
+} from '../services/db/pulse-store.ts';
+
+afterEach(() => {
+  __resetGetFirestoreForTest();
+});
 
 describe('getStageCompletionCount', () => {
   it('returns aggregated count for matching acId and stage', async () => {
@@ -25,9 +32,10 @@ describe('getStageCompletionCount', () => {
       where: whereAcSpy,
     }));
 
-    const getFirestoreMock = mock.method(firestore, 'getFirestore', () => ({
+    const getFirestoreMock = mock.fn(() => ({
       collection: collectionSpy,
     }) as never);
+    __setGetFirestoreForTest(getFirestoreMock as never);
 
     const count = await getStageCompletionCount('ac-123', 3);
 
@@ -41,6 +49,6 @@ describe('getStageCompletionCount', () => {
     assert.equal(countSpy.mock.calls.length, 1);
     assert.equal(getSpy.mock.calls.length, 1);
 
-    getFirestoreMock.mock.restore();
+    assert.equal(getFirestoreMock.mock.calls.length, 1);
   });
 });
