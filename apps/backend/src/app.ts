@@ -4,9 +4,10 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import indexRouter from './routes/index';
-import usersRouter from './routes/users';
-import geoRouter from './routes/geo';
+import indexRouter from './routes/index.ts';
+import usersRouter from './routes/users.ts';
+import geoRouter from './routes/geo.ts';
+import checklistRouter from './routes/checklist.ts';
 
 const app: Express = express();
 
@@ -19,5 +20,6 @@ app.use(express.static(path.join(process.cwd(), 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', geoRouter);
+app.use('/', checklistRouter);
 
 export default app;

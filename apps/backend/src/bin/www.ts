@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import app from '../app.js';
+import app from '../app.ts';
 import http from 'http';
 
 const port = normalizePort(process.env.PORT || '3000');

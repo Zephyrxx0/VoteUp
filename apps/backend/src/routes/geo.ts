@@ -1,5 +1,5 @@
 import express from 'express';
-import { getConstituencyByCoords } from '../services/geo/mapper.js';
+import { getConstituencyByCoords } from '../services/geo/mapper.ts';
 
 const router = express.Router();
 
