@@ -1,8 +1,9 @@
 # State: VoteUp
 
 ## Current Position
-- **Phase:** 03-Personalized-Action-Layer
-- **Wave:** 2 (03-01 complete)
+- **Phase:** 04-Social-Pulse-AI-Comparison
+- **Wave:** 1
+- **Session Stopped At:** Phase 4 context gathered (Resume: .planning/phases/04-social-pulse-ai-comparison/04-CONTEXT.md)
 
 ## Milestone Progress
 - [x] Phase 1: Foundation (Infrastructure, Base UI)
@@ -20,6 +21,9 @@
 - D-03-03: Simple instructions for checklist items.
 - D-03-04: Persistent tasks behavior for stage transitions.
 - D-03-05: Template API requires auth header and enforces stage 1-8 bounds.
+- D-04-01: AI Comparison using Side-by-side or Stacked Cards.
+- D-04-02: Social Pulse using Aggregated Milestone Counts.
+- D-04-03: Milestone Badges for both personal & community achievements.
 
 ## Blockers
 - Firebase credentials needed for 02-03, 02-04
