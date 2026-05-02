@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node --import ts-node/esm src/bin/www.ts"
+    "start": "node --import ts-node/esm src/bin/www.ts",
+    "test": "node --import ts-node/esm --test"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
