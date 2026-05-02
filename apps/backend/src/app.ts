@@ -8,6 +8,7 @@ import indexRouter from './routes/index.ts';
 import usersRouter from './routes/users.ts';
 import geoRouter from './routes/geo.ts';
 import checklistRouter from './routes/checklist.ts';
+import pulseRouter from './routes/pulse.ts';
 
 const app: Express = express();
 
@@ -21,5 +22,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', geoRouter);
 app.use('/', checklistRouter);
+app.use('/api/pulse', pulseRouter);
 
 export default app;
