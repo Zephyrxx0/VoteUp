@@ -1,0 +1,31 @@
+{
+  "onboarding": {
+    "welcome": "Welcome to VoteUp",
+    "subtitle": "Your Election Guide",
+    "language": {
+      "title": "Choose your language",
+      "english": "English",
+      "hindi": "हिन्दी (Hindi)"
+    },
+    "identity": {
+      "title": "How would you like to continue?",
+      "anonymous": "Continue as Guest",
+      "anonymousDesc": "You can link an account later",
+      "google": "Sign in with Google",
+      "googleDesc": "Link your Google account"
+    },
+    "digilocker": {
+      "title": "Verify with DigiLocker",
+      "description": "Verify your identity to get personalized updates",
+      "skip": "Skip for now",
+      "retry": "Try again"
+    },
+    "continue": "Continue",
+    "back": "Back"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again"
+  }
+}

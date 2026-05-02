@@ -1,0 +1,31 @@
+{
+  "onboarding": {
+    "welcome": "VoteUp में आपका स्वागत है",
+    "subtitle": "आपका चुनाव गाइड",
+    "language": {
+      "title": "अपनी भाषा चुनें",
+      "english": "English (अंग्रेजी)",
+      "hindi": "हिन्दी"
+    },
+    "identity": {
+      "title": "आप कैसे जारी रखना चाहेंगे?",
+      "anonymous": "अतिथि के रूप में जारी रखें",
+      "anonymousDesc": "आप बाद में एक खाता जोड़ सकते हैं",
+      "google": "Google से साइन इन करें",
+      "googleDesc": "अपना Google खाता जोड़ें"
+    },
+    "digilocker": {
+      "title": "DigiLocker से सत्यापित करें",
+      "description": "व्यक्तिगत अपडेट पाने के लिए अपनी पहचान सत्यापित करें",
+      "skip": "अभी छोड़ें",
+      "retry": "फिर से कोशिश करें"
+    },
+    "continue": "जारी रखें",
+    "back": "वापस"
+  },
+  "common": {
+    "loading": "लोड हो रहा है...",
+    "error": "कुछ गलत हो गया",
+    "retry": "फिर से कोशिश करें"
+  }
+}
