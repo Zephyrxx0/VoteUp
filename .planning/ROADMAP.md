@@ -28,18 +28,28 @@ Goal: Checklist generation based on current stage and user profile.
 
 **Plans:**
 **Wave 1**
-- [x] 03-01-PLAN.md â€” Foundation & Template System
+- [x] 03-01-PLAN.md — Foundation & Template System
 
 **Wave 2 (Blocked on Wave 1)**
-- [ ] 03-02-PLAN.md â€” AI Personalization Engine
-- [ ] 03-03-PLAN.md â€” Local-First State & Persistence
+- [ ] 03-02-PLAN.md — AI Personalization Engine
+- [ ] 03-03-PLAN.md — Local-First State & Persistence
 
-**Wave 3 (Blocked on Wave 2)**
-- [ ] 03-04-PLAN.md â€” UI Implementation & Dashboard Integration
+**Wave 2 (Blocked on Wave 1) (Blocked on Wave 2)**
+- [ ] 03-04-PLAN.md — UI Implementation & Dashboard Integration
 
 ### Phase 4: Social Pulse & AI Comparison
 Goal: Side-by-side system comparison (Gemini) and constituency pulse.
 **Requirements:** [AI-01, SOC-01]
+
+**Plans:** 4 plans
+**Wave 1**
+- [ ] 04-01-PLAN.md — Social Pulse Backend
+**Wave 2**
+- [ ] 04-02-PLAN.md — AI Comparison Backend
+**Wave 2 (Blocked on Wave 1)**
+- [ ] 04-03-PLAN.md — Social Pulse Frontend
+**Wave 3 (Blocked on Wave 2)**
+- [ ] 04-04-PLAN.md — AI Comparison Frontend
 
 ---
 ## Requirement Registry

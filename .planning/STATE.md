@@ -9,7 +9,7 @@
 - [x] Phase 1: Foundation (Infrastructure, Base UI)
 - [x] Phase 2: Data Pipeline (5/7 ready, 2 need Firebase)
 - [x] Phase 3: Action Layer (Planned - 4 plans in 3 waves)
-- [ ] Phase 4: Social & AI
+- [ ] Phase 4: Social & AI (Planned - 4 plans in 3 waves)
 
 ## Active Decisions
 - D-02-01: GPS as primary discovery; EPIC as secondary validation (Context 02).
