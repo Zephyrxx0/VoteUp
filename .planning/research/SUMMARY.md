@@ -1,12 +1,12 @@
 # Research Summary: VoteUp (Indian Election Companion)
 
-**Domain:** Indian Civic Education & Mobile-First PWA
+**Domain:** Indian Civic Education & PWA
 **Researched:** 2025-05-15
 **Overall Confidence:** HIGH
 
 ## Executive Summary
 
-The "VoteUp" ecosystem is a mobile-first platform designed to navigate the complexities of the Indian electoral system. Research confirms that building for the Indian market requires a "trust-first" approach, necessitating high availability, multi-language support, and seamless offline functionality. The recommended stack—Next.js 14 with the App Router and Firebase v11—provides the necessary real-time capabilities and SSR performance, provided that authentication is handled at the Edge to avoid layout shifts and "flash of unauthenticated content" (FOUC).
+The "VoteUp" ecosystem is a platform designed to navigate the complexities of the Indian electoral system. Research confirms that building for the Indian market requires a "trust-first" approach, necessitating high availability, multi-language support, and seamless offline functionality. The recommended stack—Next.js 14 with the App Router and Firebase v11—provides the necessary real-time capabilities and SSR performance, provided that authentication is handled at the Edge to avoid layout shifts and "flash of unauthenticated content" (FOUC).
 
 The core value proposition lies in the "8-Stage Election Pipeline," which transforms abstract bureaucratic processes into a personalized, actionable checklist. However, the reliance on official Election Commission of India (ECI) data presents a significant technical risk due to the fragility of government web sources. To mitigate this, the architecture must include a resilient background sync layer combined with a manual admin override capability. Furthermore, navigating Indian telecom regulations (TRAI DLT) for SMS-based onboarding is a critical path item that must be addressed early to ensure user accessibility.
 

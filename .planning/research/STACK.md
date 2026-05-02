@@ -29,7 +29,7 @@
 |---------|---------|---------|-----------|
 | **next-intl** | ^3.x | Multi-language Routing | Built-in ICU support for complex Indian language pluralization rules and localized URL pathnames (e.g., `/hi/register` vs `/ta/register`). |
 
-### Mobile-First PWA
+### PWA
 | Library | Version | Purpose | Rationale |
 |---------|---------|---------|-----------|
 | **Serwist** | ^9.0.0 | PWA / Service Worker | Successor to `next-pwa`. Essential for offline-first checklist support and "Election Day" reliability in low-connectivity areas. |
@@ -37,7 +37,7 @@
 ### UI & Typography
 | Technology | Version | Purpose | When to Use |
 |------------|---------|---------|-------------|
-| **Tailwind CSS** | ^3.4 | Styling | Utility-first styling for rapid, responsive mobile development. |
+| **Tailwind CSS** | ^3.4 | Styling | Utility-first styling for rapid, responsive development. |
 | **Shadcn/UI** | Latest | Component Library | Accessible, customizable components that don't bloat the bundle. |
 | **Anek Multi-Script** | Variable | Typography | Use the `Anek` series (Anek Devanagari, Anek Tamil, etc.) via `next/font/google` for harmonized script weights. |
 
