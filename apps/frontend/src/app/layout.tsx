@@ -25,11 +25,11 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CivicMirror — Your Election Guide",
+  title: "VoteUp — Your Election Guide",
   description:
-    "Understand your new country's election process, live, in your language. CivicMirror shows the election process unfolding in real time — and explains every stage through the lens of the democracy you already know.",
+    "Understand your new country's election process, live, in your language. VoteUp shows the election process unfolding in real time — and explains every stage through the lens of the democracy you already know.",
   openGraph: {
-    title: "CivicMirror",
+    title: "VoteUp",
     description: "The election process, mirrored for a new world.",
   },
 };

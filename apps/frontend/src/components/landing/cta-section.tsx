@@ -17,7 +17,7 @@ export function CTASection() {
         </h2>
 
         <p className="reveal mt-6 text-lg font-light leading-relaxed text-white/75">
-          CivicMirror makes the election process clear, personal, and live — for
+          VoteUp makes the election process clear, personal, and live — for
           every new citizen, in every democracy, in every language.
         </p>
 
@@ -43,29 +43,25 @@ export function CTASection() {
         </p>
       </div>
 
-      {/* Peep — left */}
+      {/* Peep — standing left */}
       <div className="absolute bottom-0 left-8 hidden lg:block">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={PEEPS.sitting}
-          alt="Illustrated character sitting, looking up at the call to action"
-          width={140}
-          height={160}
-          className="h-[140px] w-auto opacity-20"
+          src={PEEPS.standingWoman6}
+          alt="Illustrated full-body character on the left side of the call to action"
+          className="h-[220px] w-auto opacity-15"
           style={{ filter: "brightness(2) saturate(0)" }}
           loading="lazy"
         />
       </div>
 
-      {/* Peep — right */}
+      {/* Peep — standing right */}
       <div className="absolute bottom-0 right-8 hidden lg:block">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={PEEPS.standing}
-          alt="Illustrated character standing, looking toward the center"
-          width={120}
-          height={150}
-          className="h-[130px] w-auto opacity-20 -scale-x-100"
+          src={PEEPS.standingMan5}
+          alt="Illustrated full-body character on the right side"
+          className="h-[200px] w-auto opacity-15 -scale-x-100"
           style={{ filter: "brightness(2) saturate(0)" }}
           loading="lazy"
         />

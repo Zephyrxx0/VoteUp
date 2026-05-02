@@ -11,7 +11,7 @@ export function Footer() {
               className="text-xl font-bold italic text-civic-text-inverse"
               style={{ fontFamily: "var(--font-lora)" }}
             >
-              <span className="text-civic-coral">✦</span> CivicMirror
+              <span className="text-civic-coral">✦</span> VoteUp
             </p>
             <p
               className="mt-2 text-sm italic text-white/50"
@@ -91,7 +91,7 @@ export function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="font-mono text-[11px] text-white/30">
-            © 2026 CivicMirror
+            © 2026 VoteUp
           </p>
           <div className="flex items-center gap-4">
             <a

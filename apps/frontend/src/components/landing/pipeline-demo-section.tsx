@@ -162,16 +162,14 @@ export function PipelineDemoSection() {
         </div>
       </div>
 
-      {/* Peep at boundary — curly */}
-      <div className="absolute -bottom-12 left-8 hidden lg:block">
+      {/* Peep at boundary — standing, watching */}
+      <div className="absolute -bottom-16 left-8 hidden lg:block">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={PEEPS.curly}
-          alt="Illustrated character with curly hair observing the election pipeline"
-          width={140}
-          height={160}
-          className="h-[140px] w-auto opacity-60"
-          style={{ filter: "brightness(1.8) saturate(0.3)" }}
+          src={PEEPS.standingWoman5}
+          alt="Illustrated full-body character observing the election pipeline"
+          className="h-[200px] w-auto opacity-30"
+          style={{ filter: "brightness(2) saturate(0)" }}
           loading="lazy"
         />
       </div>

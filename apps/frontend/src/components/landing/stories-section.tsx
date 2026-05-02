@@ -22,7 +22,7 @@ export function StoriesSection() {
         </h2>
         <p className="reveal mt-3 max-w-[600px] text-base font-light leading-relaxed text-civic-text-secondary">
           Millions of new citizens navigate their first election in an
-          unfamiliar democracy every year. CivicMirror is built for every one of
+          unfamiliar democracy every year. VoteUp is built for every one of
           them.
         </p>
 
@@ -34,18 +34,13 @@ export function StoriesSection() {
               className="reveal min-w-[280px] shrink-0 rounded-[20px] border-civic-border bg-civic-card lg:min-w-0"
             >
               <CardContent className="p-6">
-                {/* Peep illustration */}
-                <div className="flex justify-center">
+                {/* Full-body standing illustration */}
+                <div className="flex justify-center overflow-hidden rounded-xl bg-civic-muted-bg py-4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={persona.peep}
-                    alt={`Illustrated character of ${persona.name}, from ${persona.from}`}
-                    width={150}
-                    height={150}
-                    className="h-[150px] w-auto drop-shadow-[8px_12px_0px_rgba(45,43,107,0.10)]"
-                    style={{
-                      filter: "sepia(0.15) hue-rotate(200deg)",
-                    }}
+                    alt={`Illustrated full-body character of ${persona.name}, from ${persona.from}`}
+                    className="h-[200px] w-auto object-contain"
                     loading="lazy"
                   />
                 </div>

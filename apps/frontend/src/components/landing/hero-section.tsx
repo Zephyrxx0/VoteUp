@@ -72,10 +72,10 @@ export function HeroSection() {
             className="animate-fade-up max-w-[480px] text-lg font-light leading-relaxed text-civic-text-secondary"
             style={{ animationDelay: "400ms", lineHeight: 1.75 }}
           >
-            CivicMirror shows you the election process unfolding live — and
-            explains every stage through the lens of the democracy you already
-            know. From Nigeria to Canada. From India to the UK. From anywhere,
-            to everywhere.
+            VoteUp shows you the election process unfolding live — and explains
+            every stage through the lens of the democracy you already know. From
+            Nigeria to Canada. From India to the UK. From anywhere, to
+            everywhere.
           </p>
 
           {/* CTA cluster */}
@@ -231,10 +231,10 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Peep — Adaeze */}
-          <div className="absolute -bottom-8 -right-4 z-20 animate-peep-float">
+          {/* Peep — standing Adaeze, full body */}
+          <div className="absolute -bottom-16 -right-6 z-20 animate-peep-float">
             {/* Speech bubble */}
-            <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-xl bg-white px-3 py-1.5 shadow-sm">
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-xl bg-white px-3 py-1.5 shadow-sm">
               <p
                 className="text-xs italic text-civic-text"
                 style={{ fontFamily: "var(--font-lora)" }}
@@ -246,14 +246,9 @@ export function HeroSection() {
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={PEEPS.afro}
-              alt="Illustrated character of Adaeze, a new citizen from Nigeria now living in Canada"
-              width={200}
-              height={240}
-              className="h-[200px] w-auto drop-shadow-[8px_12px_0px_rgba(45,43,107,0.10)]"
-              style={{
-                filter: "sepia(0.1) hue-rotate(180deg)",
-              }}
+              src={PEEPS.standingWoman1}
+              alt="Illustrated full-body character of Adaeze, a new citizen from Nigeria now living in Canada"
+              className="h-[320px] w-auto drop-shadow-[8px_12px_0px_rgba(45,43,107,0.08)]"
               loading="eager"
             />
           </div>

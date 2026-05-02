@@ -1,14 +1,82 @@
-// ─── CivicMirror Landing Page Data ─────────────────────────────────────
+// ─── VoteUp Landing Page Data ─────────────────────────────────────
 
+// Open Peeps CDN — Standing & Sitting illustrations (full-body, CC0 License by Pablo Stanley)
 export const PEEPS = {
-  standing: "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5350f9d399238698511b2f_peep-7.svg",
-  afro: "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53533367293a3e5c5a8b35_peep-21.svg",
-  curly: "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535b57f5fa1ab5dbfc2764_peep-83.svg",
-  bun: "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535c03c6b24912b82c061d_peep-89.svg",
-  reading: "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535b1d67293aaf6b5e7a33_peep-81.svg",
-  waving: "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5358fb9b55b0b0f453f5f5_peep-63.svg",
-  glasses: "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53510f2b568ad72715a304_peep-8.svg",
-  sitting: "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e51c674258ffe2fcb86d313_peep-1.svg",
+  // Standing poses — full body
+  standingWoman1:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536061519705b96fa8d804_peep-standing-1.svg",
+  standingMan1:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53607bc67e7906ad99cf5a_peep-standing-2.svg",
+  standingWoman2:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536097c6b24990d02eef77_peep-standing-3.svg",
+  standingMan2:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5360ba550b761a0bfabd32_peep-standing-4.svg",
+  standingWoman3:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5360d39b55b049be5795a1_peep-standing-5.svg",
+  standingMan3:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5360ee67293aa268617c67_peep-standing-6.svg",
+  standingWoman4:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53610ed3992333c259150c_peep-standing-7.svg",
+  standingMan4:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53612767293a6c4f619687_peep-standing-8.svg",
+  standingWoman5:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5361568e2493c0fa0ae191_peep-standing-9.svg",
+  standingMan5:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53613f9b55b0a5a457c452_peep-standing-10.svg",
+  standingWoman6:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5361909b55b0502657e357_peep-standing-11.svg",
+  standingMan6:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5361abc992503993ce737e_peep-standing-12.svg",
+  standingWoman7:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5361ccd3992383f7595afc_peep-standing-13.svg",
+  standingMan7:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5361e9f3aa4be48230418f_peep-standing-14.svg",
+  standingWoman8:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536210c67e798fb29b1e94_peep-standing-15.svg",
+  standingMan8:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53622ec67e7957fc9b32e0_peep-standing-16.svg",
+  standingWoman9:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53624b9b55b0127f5851cf_peep-standing-17.svg",
+  standingMan9:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536266c99250fe47cebfc0_peep-standing-18.svg",
+  standingMan10:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536281c992503d98cecdc1_peep-standing-19.svg",
+  standingWoman10:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5362a27488c217864c784d_peep-standing-20.svg",
+  standingWoman11:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5362c164109d10570651c3_peep-standing-21.svg",
+  standingMan11:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5362e2f5fa1aefa7ffe47c_peep-standing-22.svg",
+
+  // Sitting poses — seated
+  sittingWoman1:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535e838e249316920983c3_peep-sitting-5.svg",
+  sittingMan1:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535e2ce35d38156a694f11_peep-sitting-2.svg",
+  sittingWoman2:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535e9fc992502f35cd7902_peep-sitting-6.svg",
+  sittingMan2:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535eb7550b76782df9e820_peep-sitting-7.svg",
+  sittingWoman3:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535f0d9b55b01d2056cf00_peep-sitting-10.svg",
+  sittingMan3:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535f2ad39923f7d558435b_peep-sitting-11.svg",
+  sittingWoman4:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535f438becbf2fab5619bb_peep-sitting-12.svg",
+  sittingMan4:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535f7d9b55b097be57089f_peep-sitting-14.svg",
+
+  // Bust poses — head/shoulders (for avatar stacks)
+  bust1:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5350f9d399238698511b2f_peep-7.svg",
+  bust2:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53533367293a3e5c5a8b35_peep-21.svg",
+  bust3:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535b57f5fa1ab5dbfc2764_peep-83.svg",
+  bust4:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535c03c6b24912b82c061d_peep-89.svg",
+  bust5:
+    "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e53510f2b568ad72715a304_peep-8.svg",
 } as const;
 
 export const PERSONAS = [
@@ -18,9 +86,9 @@ export const PERSONAS = [
     fromFlag: "🇳🇬",
     to: "Canada",
     toFlag: "🇨🇦",
-    peep: PEEPS.afro,
+    peep: PEEPS.standingWoman1,
     quote:
-      "I'd voted in Nigeria three times. The Canadian system felt completely foreign. CivicMirror made it click in 10 minutes.",
+      "I'd voted in Nigeria three times. The Canadian system felt completely foreign. VoteUp made it click in 10 minutes.",
     election: "Canadian Federal Election",
   },
   {
@@ -29,9 +97,9 @@ export const PERSONAS = [
     fromFlag: "🇲🇽",
     to: "Spain",
     toFlag: "🇪🇸",
-    peep: PEEPS.standing,
+    peep: PEEPS.standingMan2,
     quote:
-      "I knew how elections worked back home. But Spain's system? Completely different. CivicMirror was like having a patient friend explain it all.",
+      "I knew how elections worked back home. But Spain's system? Completely different. VoteUp was like having a patient friend explain it all.",
     election: "Catalonia Regional Election",
   },
   {
@@ -40,9 +108,9 @@ export const PERSONAS = [
     fromFlag: "🇮🇳",
     to: "United Kingdom",
     toFlag: "🇬🇧",
-    peep: PEEPS.bun,
+    peep: PEEPS.standingWoman3,
     quote:
-      "India has the world's biggest election. But the UK does it so differently — no voter ID, no ink on the finger. CivicMirror bridged that gap.",
+      "India has the world's biggest election. But the UK does it so differently — no voter ID, no ink on the finger. VoteUp bridged that gap.",
     election: "UK General Election",
   },
   {
@@ -51,9 +119,9 @@ export const PERSONAS = [
     fromFlag: "🇵🇱",
     to: "Germany",
     toFlag: "🇩🇪",
-    peep: PEEPS.glasses,
+    peep: PEEPS.standingMan3,
     quote:
-      "The German mixed-member proportional system confused me. CivicMirror compared it side-by-side with Poland's system. Now I get both votes.",
+      "The German mixed-member proportional system confused me. VoteUp compared it side-by-side with Poland's system. Now I get both votes.",
     election: "Bundestag Federal Election",
   },
 ] as const;

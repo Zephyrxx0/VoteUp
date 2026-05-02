@@ -54,7 +54,7 @@ export function CommunitySection() {
           You&apos;re not navigating this alone.
         </h2>
         <p className="reveal mt-3 max-w-[500px] text-base font-light text-civic-text-secondary">
-          Thousands of new citizens are using CivicMirror across 50 countries
+          Thousands of new citizens are using VoteUp across 50 countries
           right now.
         </p>
 
@@ -121,11 +121,11 @@ export function CommunitySection() {
               <div className="mt-4">
                 <div className="flex items-center">
                   {[
-                    PEEPS.afro,
-                    PEEPS.standing,
-                    PEEPS.bun,
-                    PEEPS.glasses,
-                    PEEPS.reading,
+                    PEEPS.bust1,
+                    PEEPS.bust2,
+                    PEEPS.bust3,
+                    PEEPS.bust4,
+                    PEEPS.bust5,
                   ].map((peep, i) => (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img

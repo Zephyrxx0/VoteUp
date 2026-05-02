@@ -26,11 +26,11 @@ export function Navbar() {
         {/* Logo */}
         <a
           href="#"
-          className="flex items-center gap-1.5 font-[var(--font-lora)] text-xl font-bold italic text-civic-indigo"
+          className="flex items-center gap-1.5 text-xl font-bold italic text-civic-indigo"
           style={{ fontFamily: "var(--font-lora)" }}
         >
           <span className="text-civic-coral">✦</span>
-          <span>CivicMirror</span>
+          <span>VoteUp</span>
         </a>
 
         {/* Desktop nav links */}
@@ -40,7 +40,7 @@ export function Navbar() {
               <a
                 key={link}
                 href={`#${link.toLowerCase().replace(/['\s]/g, "-")}`}
-                className="font-[var(--font-dm-sans)] text-sm text-civic-text-secondary transition-colors hover:text-civic-indigo hover:underline hover:decoration-civic-coral hover:underline-offset-4"
+                className="text-sm text-civic-text-secondary transition-colors hover:text-civic-indigo hover:underline hover:decoration-civic-coral hover:underline-offset-4"
               >
                 {link}
               </a>

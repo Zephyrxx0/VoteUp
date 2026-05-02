@@ -73,15 +73,12 @@ export function HowItWorksSection() {
                 </p>
               </div>
             </div>
-            {/* Peep — waving */}
+            {/* Peep — standing, welcoming */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={PEEPS.waving}
-              alt="Illustrated character waving in welcome"
-              width={120}
-              height={140}
-              className="absolute -bottom-10 -left-4 hidden h-[140px] w-auto drop-shadow-[8px_12px_0px_rgba(45,43,107,0.10)] lg:block"
-              style={{ filter: "sepia(0.15) hue-rotate(200deg)" }}
+              src={PEEPS.standingWoman4}
+              alt="Illustrated character welcoming you to the onboarding flow"
+              className="absolute -bottom-16 -left-8 hidden h-[240px] w-auto drop-shadow-[6px_10px_0px_rgba(45,43,107,0.06)] lg:block"
               loading="lazy"
             />
           </div>
@@ -124,7 +121,7 @@ export function HowItWorksSection() {
           </div>
 
           {/* Left (reversed) — pipeline visualization */}
-          <div className="lg:w-1/2">
+          <div className="relative lg:w-1/2">
             <div className="rounded-2xl border border-civic-border bg-civic-card p-6 shadow-sm">
               <div className="flex flex-wrap items-center gap-1.5">
                 {[
@@ -166,6 +163,14 @@ export function HowItWorksSection() {
                 </span>
               </div>
             </div>
+            {/* Peep — sitting, watching */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={PEEPS.sittingMan1}
+              alt="Illustrated character sitting and watching the election pipeline"
+              className="absolute -bottom-12 -right-4 hidden h-[180px] w-auto drop-shadow-[6px_10px_0px_rgba(45,43,107,0.06)] lg:block"
+              loading="lazy"
+            />
           </div>
         </div>
 
@@ -232,20 +237,17 @@ export function HowItWorksSection() {
             </div>
           </div>
 
-          {/* Right — peep + comparison card */}
+          {/* Right — peep + floating card */}
           <div className="relative hidden lg:flex lg:w-1/2 lg:items-center lg:justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={PEEPS.reading}
-              alt="Illustrated character reading thoughtfully about election comparisons"
-              width={200}
-              height={240}
-              className="h-[220px] w-auto drop-shadow-[8px_12px_0px_rgba(45,43,107,0.10)]"
-              style={{ filter: "sepia(0.15) hue-rotate(200deg)" }}
+              src={PEEPS.standingMan7}
+              alt="Illustrated full-body character reading about election comparisons"
+              className="h-[340px] w-auto drop-shadow-[6px_10px_0px_rgba(45,43,107,0.06)]"
               loading="lazy"
             />
             {/* Floating comparison card */}
-            <div className="absolute right-0 top-8 w-[200px] rounded-xl border border-civic-border bg-white p-3 shadow-md">
+            <div className="absolute right-4 top-12 w-[200px] rounded-xl border border-civic-border bg-white p-3 shadow-md">
               <div className="flex items-center gap-2">
                 <span className="text-xl">🇳🇬</span>
                 <span className="text-civic-text-muted" aria-hidden="true">
