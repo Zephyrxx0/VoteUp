@@ -2,7 +2,7 @@
 
 ## Current Position
 - **Phase:** 03-Personalized-Action-Layer
-- **Wave:** 1 (Ready to execute)
+- **Wave:** 2 (03-01 complete)
 
 ## Milestone Progress
 - [x] Phase 1: Foundation (Infrastructure, Base UI)
@@ -19,6 +19,7 @@
 - D-03-02: Local-first progress persistence (Zustand + Offline-sync).
 - D-03-03: Simple instructions for checklist items.
 - D-03-04: Persistent tasks behavior for stage transitions.
+- D-03-05: Template API requires auth header and enforces stage 1-8 bounds.
 
 ## Blockers
 - Firebase credentials needed for 02-03, 02-04
@@ -28,4 +29,5 @@
 - [x] Implement ECI Scraper engine (Wave 1)
 - [x] Implement Discovery UI (Wave 2)
 - [x] Implement Offline resilience (Wave 3)
+- [x] 03-01 Foundation & Template System
 - [ ] Add Firebase credentials to enable 02-03, 02-04
