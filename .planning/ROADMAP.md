@@ -49,6 +49,7 @@ Goal: Side-by-side system comparison (Gemini) and constituency pulse.
 - [ ] 04-02-PLAN.md — AI Comparison Backend
 **Wave 2 (Blocked on Wave 1)**
 - [ ] 04-03-PLAN.md — Social Pulse Frontend
+- [x] 04-03-PLAN.md — Social Pulse Frontend
 **Wave 3 (Blocked on Wave 2)**
 - [ ] 04-04-PLAN.md — AI Comparison Frontend
 

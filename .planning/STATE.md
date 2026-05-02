@@ -5,13 +5,14 @@
 - **Wave:** 1
 - **Session Stopped At:** Phase 4 context gathered (Resume: .planning/phases/04-social-pulse-ai-comparison/04-CONTEXT.md)
 - **Session Stopped At:** Completed 04-01-PLAN.md (Resume: .planning/phases/04-social-pulse-ai-comparison/04-02-PLAN.md)
+- **Session Stopped At:** Completed 04-03-PLAN.md (Resume: .planning/phases/04-social-pulse-ai-comparison/04-04-PLAN.md)
 
 ## Milestone Progress
 - [x] Phase 1: Foundation (Infrastructure, Base UI)
 - [x] Phase 2: Data Pipeline (5/7 ready, 2 need Firebase)
 - [x] Phase 3: Action Layer (Planned - 4 plans in 3 waves)
 - [ ] Phase 4: Social & AI (Planned - 4 plans in 3 waves)
-- [ ] Phase 4: Social & AI (In progress - 1/4 plans complete)
+- [ ] Phase 4: Social & AI (In progress - 3/4 plans complete)
 
 ## Active Decisions
 - D-02-01: GPS as primary discovery; EPIC as secondary validation (Context 02).
@@ -26,6 +27,8 @@
 - D-04-01: AI Comparison using Side-by-side or Stacked Cards.
 - D-04-02: Social Pulse using Aggregated Milestone Counts.
 - D-04-03: Milestone Badges for both personal & community achievements.
+- D-04-03A: Social pulse threshold checks evaluate `count > threshold` from store stage counts.
+- D-04-03B: Dashboard badge rendering combines checklist completion and community milestones.
 
 ## Blockers
 - Firebase credentials needed for 02-03, 02-04
