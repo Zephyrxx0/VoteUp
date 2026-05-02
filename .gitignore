@@ -1,5 +1,6 @@
 *.env
 !.env.example
+*service-account.json
 
 
 .agents/
@@ -14,10 +15,8 @@ AGENTS.md
 CLAUDE.md
 GEMINI.md
 
-
-
-
 .planning/
+@.planning
 .entire/
 graphify-out/
 SPEC.md

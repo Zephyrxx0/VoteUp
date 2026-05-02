@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "AC001",
+        "state": "Delhi",
+        "type": "AC"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.0, 28.0],
+            [77.1, 28.0],
+            [77.1, 28.1],
+            [77.0, 28.1],
+            [77.0, 28.0]
+          ]
+        ]
+      }
+    }
+  ]
+}
