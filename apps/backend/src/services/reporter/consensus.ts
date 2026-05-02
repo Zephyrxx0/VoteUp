@@ -1,4 +1,4 @@
-import { getReportsForConstituency, type UserReport } from '../db/reports-store.js';
+import * as reportsStore from '../db/reports-store.ts';
 
 interface ConsensusResult {
   stage: string;
@@ -11,7 +11,7 @@ const THRESHOLD_SUM = 10.0;
 const THRESHOLD_PERCENT = 0.6;
 
 export async function calculateConsensus(acId: string): Promise<ConsensusResult | null> {
-  const reports = await getReportsForConstituency(acId);
+  const reports = await reportsStore.getReportsForConstituency(acId);
   
   if (reports.length === 0) {
     return null;
