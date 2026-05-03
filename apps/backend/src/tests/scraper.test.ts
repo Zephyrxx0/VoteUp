@@ -7,7 +7,7 @@ describe('scraper test skeleton', () => {
   it('loads custom-table fixture with expected result fields', () => {
     const fixturePath = join(
       process.cwd(),
-      'apps/backend/src/tests/fixtures/eci_results_mock.html',
+      'src/tests/fixtures/eci_results_mock.html',
     );
     const html = readFileSync(fixturePath, 'utf-8');
 

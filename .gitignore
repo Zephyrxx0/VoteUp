@@ -16,6 +16,7 @@ CLAUDE.md
 GEMINI.md
 
 .planning/
+.firecrawl/
 @.planning
 .entire/
 graphify-out/
@@ -26,3 +27,4 @@ apps/backend/dist/
 *.log
 *.zip
 .DS_Store
+.turbo/
