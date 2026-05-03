@@ -1,19 +1,24 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Metadata } from "next";
+import { Inter, Lora } from "next/font/google";
 import "./globals.css";
-import { FirestoreSync } from "@/components/shared/FirestoreSync";
 
 const inter = Inter({
-  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  display: "swap",
+  variable: "--font-inter",
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  variable: "--font-lora",
 });
 
 export const metadata: Metadata = {
   title: "VoteUp — Your Election Guide",
   description:
     "Understand your new country's election process, live, in your language. VoteUp shows the election process unfolding in real time — and explains every stage through the lens of the democracy you already know.",
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: "VoteUp",
     description: "The election process, mirrored for a new world.",
@@ -22,19 +27,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html
-      lang="en"
-      className={inter.variable}
-      data-scroll-behavior="smooth"
-      suppressHydrationWarning
-    >
-      <body className="min-h-screen antialiased">
+    <html lang="en" className={`${inter.variable} ${lora.variable}`} data-scroll-behavior="smooth">
+      <body className="min-h-screen antialiased bg-[#FDFDFF]">
         {children}
-        <FirestoreSync />
       </body>
     </html>
   );

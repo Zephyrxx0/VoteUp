@@ -1,11 +1,14 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ExternalLink } from 'lucide-react';
 
 export interface CandidateResultView {
   name: string;
   party: string;
   votes: number;
   status: string;
+  image?: string;
+  sourceUrl?: string;
 }
 
 const STATUS_LABELS = new Set(['Leading', 'Won']);
@@ -23,6 +26,8 @@ export function sanitizeResult(candidate: CandidateResultView): CandidateResultV
     party: candidate.party.trim(),
     votes: Number.isFinite(candidate.votes) ? Math.max(0, Math.floor(candidate.votes)) : 0,
     status: candidate.status.trim(),
+    image: candidate.image,
+    sourceUrl: candidate.sourceUrl,
   };
 }
 
@@ -31,13 +36,26 @@ export function ResultCard({ candidate }: { candidate: CandidateResultView }) {
   const status = normalizeStatus(sanitized.status);
   const showStatus = STATUS_LABELS.has(status);
 
-  return (
-    <Card size="sm" className="w-full">
+  const CardBody = (
+    <Card size="sm" className={`w-full transition-shadow ${sanitized.sourceUrl ? 'hover:shadow-md cursor-pointer' : ''}`}>
       <CardHeader className="gap-2">
         <div className="flex items-start justify-between gap-3">
-          <div>
-            <CardTitle>{sanitized.name}</CardTitle>
-            <p className="mt-1 text-xs text-muted-foreground">{sanitized.party}</p>
+          <div className="flex items-center gap-3">
+            {sanitized.image && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img 
+                src={sanitized.image} 
+                alt={`${sanitized.name} portrait`} 
+                className="h-10 w-10 rounded-full object-cover border border-civic-border"
+              />
+            )}
+            <div>
+              <CardTitle className="flex items-center gap-1.5">
+                {sanitized.name}
+                {sanitized.sourceUrl && <ExternalLink className="h-3 w-3 text-muted-foreground" />}
+              </CardTitle>
+              <p className="mt-1 text-xs text-muted-foreground">{sanitized.party}</p>
+            </div>
           </div>
           {status === 'Won' ? (
             <Badge variant="default" aria-label="Winner badge">
@@ -60,4 +78,14 @@ export function ResultCard({ candidate }: { candidate: CandidateResultView }) {
       </CardContent>
     </Card>
   );
+
+  if (sanitized.sourceUrl) {
+    return (
+      <a href={sanitized.sourceUrl} target="_blank" rel="noopener noreferrer" className="block focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent rounded-xl">
+        {CardBody}
+      </a>
+    );
+  }
+
+  return CardBody;
 }

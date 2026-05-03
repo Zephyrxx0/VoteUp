@@ -16,15 +16,15 @@ export function PulseCounter() {
       <h2 className="text-lg font-semibold">Social Pulse</h2>
       <p className="mt-1 text-sm text-muted-foreground">Community milestone momentum across stages</p>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <div className="rounded-lg border p-3">
-          <p className="text-xs uppercase text-muted-foreground">Total milestone completions</p>
-          <p className="mt-1 text-2xl font-semibold">{totalCompletions}</p>
+      <div className="mt-4 flex flex-wrap gap-4">
+        <div className="flex-1 min-w-[140px] rounded-lg border bg-civic-muted-bg/30 p-3 transition-all hover:border-civic-indigo">
+          <p className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">Global Momentum</p>
+          <p className="mt-1 text-2xl font-bold text-civic-indigo">{totalCompletions}</p>
         </div>
 
-        <div className="rounded-lg border p-3">
-          <p className="text-xs uppercase text-muted-foreground">Tracked stages</p>
-          <p className="mt-1 text-2xl font-semibold">{Object.keys(stageCounts).length}</p>
+        <div className="flex-1 min-w-[140px] rounded-lg border bg-civic-muted-bg/30 p-3 transition-all hover:border-civic-coral">
+          <p className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">Tracked Stages</p>
+          <p className="mt-1 text-2xl font-bold text-civic-coral">{Object.keys(stageCounts).length}</p>
         </div>
       </div>
     </section>

@@ -4,12 +4,12 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
-import * as admin from 'firebase-admin';
+import { applicationDefault, getApps, initializeApp } from 'firebase-admin/app';
 
 // Initialize Firebase Admin SDK
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
+if (getApps().length === 0) {
+  initializeApp({
+    credential: applicationDefault(),
     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL
   });
 }
