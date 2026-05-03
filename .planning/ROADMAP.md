@@ -69,7 +69,7 @@ Goal: Add user profiles, voting history, and persistent badges with client-side 
 
 **Plans:** 6 plans
 **Wave 1**
-- [ ] 06-01-PLAN.md — Encryption Utility (TDD)
+- [x] 06-01-PLAN.md — Encryption Utility (TDD)
 - [ ] 06-02-PLAN.md — Firestore Schema & User Service
 **Wave 2**
 - [ ] 06-03-PLAN.md — Auth Upgrading & Account Linking
