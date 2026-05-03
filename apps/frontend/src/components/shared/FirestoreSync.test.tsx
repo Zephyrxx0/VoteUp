@@ -1,5 +1,5 @@
-import { render, waitFor } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { render } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const getCurrentUserMock = vi.fn();
 const updateUserProfileMock = vi.fn();
@@ -38,6 +38,10 @@ describe('FirestoreSync', () => {
     });
   });
 
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('does not sync when user is anonymous', async () => {
     getCurrentUserMock.mockReturnValue({ uid: 'anon', isAnonymous: true });
 
@@ -57,11 +61,8 @@ describe('FirestoreSync', () => {
     };
     rerender(<FirestoreSync />);
 
-    vi.advanceTimersByTime(2500);
-
-    await waitFor(() => {
-      expect(updateUserProfileMock).toHaveBeenCalledTimes(1);
-    });
+    await vi.advanceTimersByTimeAsync(2500);
+    expect(updateUserProfileMock).toHaveBeenCalledTimes(1);
   });
 
   it('encrypts sensitive values before syncing profile', async () => {
@@ -73,17 +74,14 @@ describe('FirestoreSync', () => {
     };
     rerender(<FirestoreSync epicId="ABC1234567" acId="S2477" />);
 
-    vi.advanceTimersByTime(2500);
-
-    await waitFor(() => {
-      expect(encryptSensitiveMock).toHaveBeenCalledWith('user-2', 'ABC1234567|S2477');
-      expect(updateUserProfileMock).toHaveBeenCalledWith(
-        'user-2',
-        expect.objectContaining({
-          encryptedVoterData: { ciphertext: 'cipher', iv: 'iv', salt: 'salt' },
-        }),
-      );
-    });
+    await vi.advanceTimersByTimeAsync(2500);
+    expect(encryptSensitiveMock).toHaveBeenCalledWith('user-2', 'ABC1234567|S2477');
+    expect(updateUserProfileMock).toHaveBeenCalledWith(
+      'user-2',
+      expect.objectContaining({
+        encryptedVoterData: { ciphertext: 'cipher', iv: 'iv', salt: 'salt' },
+      }),
+    );
   });
 
   it('debounces rapid changes into one write', async () => {
@@ -101,10 +99,7 @@ describe('FirestoreSync', () => {
     };
     rerender(<FirestoreSync />);
 
-    vi.advanceTimersByTime(2500);
-
-    await waitFor(() => {
-      expect(updateUserProfileMock).toHaveBeenCalledTimes(1);
-    });
+    await vi.advanceTimersByTimeAsync(2500);
+    expect(updateUserProfileMock).toHaveBeenCalledTimes(1);
   });
 });
