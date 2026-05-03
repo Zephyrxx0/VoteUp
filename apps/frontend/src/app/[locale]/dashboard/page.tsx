@@ -21,6 +21,7 @@ const STAGE_TO_NUMBER: Record<string, number> = {
   Silence: 6,
   Polling: 7,
   Counting: 8,
+  'Result Declared': 8,
 };
 
 const CONSTITUENCY_ID = 'S2477';
@@ -39,6 +40,14 @@ function toResultView(candidate: {
   };
 }
 
+export function shouldShowShareJourney(stage: string): boolean {
+  return stage === 'Result Declared';
+}
+
+export function buildShareJourneyMessage(constituency: string, winner: string): string {
+  return `I followed the election journey for ${constituency} on VoteUp! Result: ${winner} won!`;
+}
+
 export default function DashboardPage() {
   const router = useRouter();
   const user = getCurrentUser();
@@ -51,6 +60,7 @@ export default function DashboardPage() {
   const [constituencyName] = useState('New Delhi');
   const [liveResults, setLiveResults] = useState<CandidateResultView[]>([]);
   const [statusError, setStatusError] = useState<string | null>(null);
+  const [shareStatus, setShareStatus] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user?.uid) {
@@ -102,6 +112,37 @@ export default function DashboardPage() {
   }, [fetchCounts, stageNumber]);
 
   const isCountingStage = liveStage === 'Counting';
+  const canShareJourney = shouldShowShareJourney(liveStage);
+  const winningCandidate = useMemo(
+    () => liveResults.find((candidate) => candidate.status.toLowerCase().includes('won')) ?? liveResults[0],
+    [liveResults],
+  );
+
+  async function handleShareJourney(): Promise<void> {
+    const winner = winningCandidate?.name ?? 'the winning candidate';
+    const message = buildShareJourneyMessage(constituencyName, winner);
+
+    try {
+      if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+        await navigator.share({
+          title: 'VoteUp Election Journey',
+          text: message,
+        });
+        setShareStatus('Shared successfully.');
+        return;
+      }
+
+      if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(message);
+        setShareStatus('Copied message to clipboard.');
+        return;
+      }
+
+      setShareStatus(message);
+    } catch {
+      setShareStatus('Unable to share right now. Please try again.');
+    }
+  }
 
   if (!user?.uid) {
     return (
@@ -128,6 +169,20 @@ export default function DashboardPage() {
           </div>
         ) : null}
         {statusError ? <p className="mt-3 text-sm text-destructive">{statusError}</p> : null}
+        {canShareJourney ? (
+          <div className="mt-3 space-y-2">
+            <button
+              type="button"
+              onClick={() => {
+                void handleShareJourney();
+              }}
+              className="inline-flex items-center rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+            >
+              Share Journey
+            </button>
+            {shareStatus ? <p className="text-xs text-muted-foreground">{shareStatus}</p> : null}
+          </div>
+        ) : null}
       </section>
 
       <ChecklistContainer stage={stageNumber} constituency={constituencyName} />

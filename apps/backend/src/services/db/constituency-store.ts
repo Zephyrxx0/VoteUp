@@ -15,6 +15,7 @@ const EIGHT_STAGES = [
 export type Stage = typeof EIGHT_STAGES[number];
 
 const DEFAULT_COUNTING_DATE = '2026-05-04T00:00:00.000Z';
+const DEMO_CONSTITUENCY_IDS = new Set(['S2477']);
 
 interface FirestoreInput {
   state: string;
@@ -91,7 +92,7 @@ export function resolveCurrentStage(dates: {
   polling_date?: string;
   counting_date?: string;
   result_date?: string;
-}, now = new Date()): Stage {
+}, now = new Date(), constituencyId?: string): Stage {
   const checkpoints: Array<[keyof typeof dates, Stage]> = [
     ['result_date', 'Result Declared'],
     ['counting_date', 'Counting'],
@@ -102,8 +103,18 @@ export function resolveCurrentStage(dates: {
     ['notification_date', 'Notification Issued'],
   ];
 
-  const countingDate = new Date(dates.counting_date ?? DEFAULT_COUNTING_DATE);
-  if (now >= countingDate) return 'Counting';
+  const normalizedConstituencyId = constituencyId?.trim().toUpperCase();
+  const fallbackCountingDate = dates.counting_date
+    ?? (!normalizedConstituencyId || DEMO_CONSTITUENCY_IDS.has(normalizedConstituencyId)
+      ? DEFAULT_COUNTING_DATE
+      : undefined);
+
+  if (fallbackCountingDate) {
+    const countingDate = new Date(fallbackCountingDate);
+    if (!Number.isNaN(countingDate.getTime()) && now >= countingDate) {
+      return 'Counting';
+    }
+  }
 
   for (const [key, stage] of checkpoints) {
     if (key === 'counting_date') continue;
