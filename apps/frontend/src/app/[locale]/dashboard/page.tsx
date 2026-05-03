@@ -3,6 +3,7 @@
 import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChecklistContainer } from '@/components/checklist/ChecklistContainer';
+import { ComparisonCards } from '@/components/ai-comparison/ComparisonCards';
 import { MilestoneBadge } from '@/components/social-pulse/MilestoneBadge';
 import { PulseCounter } from '@/components/social-pulse/PulseCounter';
 import { getCurrentUser } from '@/lib/auth';
@@ -12,6 +13,7 @@ import { useSocialPulseStore } from '@/lib/stores/social-pulse-store';
 export default function DashboardPage() {
   const router = useRouter();
   const user = getCurrentUser();
+  const homeCountry = 'United States';
   const fetchCounts = useSocialPulseStore((state) => state.fetchCounts);
   const pulseError = useSocialPulseStore((state) => state.error);
   const checklistItems = useChecklistStore((state) => state.items);
@@ -61,6 +63,8 @@ export default function DashboardPage() {
       </section>
 
       <ChecklistContainer stage={mockStageData.stage} constituency={mockStageData.constituency} />
+
+      <ComparisonCards homeCountry={homeCountry} />
 
       <section className="mt-6 space-y-3">
         <PulseCounter />
