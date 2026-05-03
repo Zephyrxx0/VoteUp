@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 export function StoriesSection() {
   return (
     <section
-      id="who-it's-for"
+      id="who-its-for"
       className="bg-civic-muted-bg py-20"
       aria-label="Who it's for"
     >

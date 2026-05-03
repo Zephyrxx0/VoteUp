@@ -2,6 +2,13 @@
 
 import { useEffect, useState } from "react";
 
+const SECTION_LINKS = [
+  { label: "How it works", href: "#how-it-works" },
+  { label: "Who it's for", href: "#who-its-for" },
+  { label: "Community", href: "#community" },
+  { label: "About", href: "#cta" },
+] as const;
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -25,7 +32,7 @@ export function Navbar() {
       <div className="mx-auto flex h-full max-w-[1200px] items-center justify-between px-4 lg:px-6">
         {/* Logo */}
         <a
-          href="#"
+          href="#hero"
           className="flex items-center gap-1.5 text-xl font-bold italic text-civic-indigo"
           style={{ fontFamily: "var(--font-lora)" }}
         >
@@ -35,17 +42,15 @@ export function Navbar() {
 
         {/* Desktop nav links */}
         <div className="hidden items-center gap-8 lg:flex">
-          {["How it works", "Who it's for", "Community", "About"].map(
-            (link) => (
+          {SECTION_LINKS.map((link) => (
               <a
-                key={link}
-                href={`#${link.toLowerCase().replace(/['\s]/g, "-")}`}
+                key={link.label}
+                href={link.href}
                 className="text-sm text-civic-text-secondary transition-colors hover:text-civic-indigo hover:underline hover:decoration-civic-coral hover:underline-offset-4"
               >
-                {link}
+                {link.label}
               </a>
-            )
-          )}
+            ))}
         </div>
 
         {/* Right side */}
@@ -60,7 +65,7 @@ export function Navbar() {
 
           {/* Sign in — desktop only */}
           <a
-            href="#"
+            href="/dashboard"
             className="hidden text-sm text-civic-text-secondary transition-colors hover:text-civic-indigo lg:block"
           >
             Sign in
@@ -111,23 +116,21 @@ export function Navbar() {
       {mobileOpen && (
         <div className="border-b border-civic-border bg-civic-page px-4 py-4 lg:hidden">
           <div className="flex flex-col gap-3">
-            {["How it works", "Who it's for", "Community", "About"].map(
-              (link) => (
+            {SECTION_LINKS.map((link) => (
                 <a
-                  key={link}
-                  href={`#${link.toLowerCase().replace(/['\s]/g, "-")}`}
+                  key={link.label}
+                  href={link.href}
                   className="py-2 text-sm text-civic-text-secondary"
                   onClick={() => setMobileOpen(false)}
                 >
-                  {link}
+                  {link.label}
                 </a>
-              )
-            )}
+              ))}
             <div className="flex items-center gap-3 pt-2 border-t border-civic-border">
               <button className="flex items-center gap-1.5 font-mono text-xs text-civic-text-secondary">
                 🌐 EN
               </button>
-              <a href="#" className="text-sm text-civic-text-secondary">
+              <a href="/dashboard" className="text-sm text-civic-text-secondary">
                 Sign in
               </a>
             </div>
