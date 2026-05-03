@@ -1,22 +1,56 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Circle } from 'lucide-react';
 import { ChecklistContainer } from '@/components/checklist/ChecklistContainer';
 import { ComparisonCards } from '@/components/ai-comparison/ComparisonCards';
 import { MilestoneBadge } from '@/components/social-pulse/MilestoneBadge';
 import { PulseCounter } from '@/components/social-pulse/PulseCounter';
+import { ResultCard, type CandidateResultView } from '@/components/ui/result-card';
 import { getCurrentUser } from '@/lib/auth';
 import { useChecklistStore } from '@/lib/stores/checklist-store';
 import { useSocialPulseStore } from '@/lib/stores/social-pulse-store';
+
+const STAGE_TO_NUMBER: Record<string, number> = {
+  Registration: 1,
+  Verification: 2,
+  'Final Roll': 3,
+  Notification: 4,
+  Campaigning: 5,
+  Silence: 6,
+  Polling: 7,
+  Counting: 8,
+};
+
+const CONSTITUENCY_ID = 'S2477';
+
+function toResultView(candidate: {
+  candidate: string;
+  party: string;
+  votes: number;
+  status: string;
+}): CandidateResultView {
+  return {
+    name: candidate.candidate,
+    party: candidate.party,
+    votes: candidate.votes,
+    status: candidate.status,
+  };
+}
 
 export default function DashboardPage() {
   const router = useRouter();
   const user = getCurrentUser();
   const homeCountry = 'United States';
   const fetchCounts = useSocialPulseStore((state) => state.fetchCounts);
+  const fetchConstituencyStatus = useSocialPulseStore((state) => state.fetchConstituencyStatus);
   const pulseError = useSocialPulseStore((state) => state.error);
   const checklistItems = useChecklistStore((state) => state.items);
+  const [liveStage, setLiveStage] = useState('Campaigning');
+  const [constituencyName] = useState('New Delhi');
+  const [liveResults, setLiveResults] = useState<CandidateResultView[]>([]);
+  const [statusError, setStatusError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user?.uid) {
@@ -24,14 +58,7 @@ export default function DashboardPage() {
     }
   }, [router, user?.uid]);
 
-  const mockStageData = useMemo(
-    () => ({
-      stage: 5,
-      stageName: 'Campaigning',
-      constituency: 'New Delhi',
-    }),
-    [],
-  );
+  const stageNumber = useMemo(() => STAGE_TO_NUMBER[liveStage] ?? 5, [liveStage]);
 
   const personalCompletedCount = useMemo(
     () => Object.values(checklistItems).filter((item) => item.completed).length,
@@ -39,8 +66,42 @@ export default function DashboardPage() {
   );
 
   useEffect(() => {
-    void fetchCounts('new-delhi', mockStageData.stage);
-  }, [fetchCounts, mockStageData.stage]);
+    let cancelled = false;
+
+    async function refreshStatus() {
+      try {
+        const status = await fetchConstituencyStatus(CONSTITUENCY_ID);
+        if (cancelled) return;
+
+        const sortedResults = status.results
+          .map(toResultView)
+          .sort((a, b) => b.votes - a.votes);
+
+        setLiveStage(status.stage);
+        setLiveResults(sortedResults);
+        setStatusError(null);
+      } catch (error) {
+        if (cancelled) return;
+        setStatusError(error instanceof Error ? error.message : 'Unable to fetch live status');
+      }
+    }
+
+    void refreshStatus();
+    const intervalId = window.setInterval(() => {
+      void refreshStatus();
+    }, 60_000);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(intervalId);
+    };
+  }, [fetchConstituencyStatus]);
+
+  useEffect(() => {
+    void fetchCounts('new-delhi', stageNumber);
+  }, [fetchCounts, stageNumber]);
+
+  const isCountingStage = liveStage === 'Counting';
 
   if (!user?.uid) {
     return (
@@ -55,20 +116,42 @@ export default function DashboardPage() {
       <section className="mb-6 rounded-xl border bg-card p-4 sm:p-5">
         <h1 className="text-2xl font-semibold">Personalized Action Plan</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Current stage: <span className="font-medium text-foreground">{mockStageData.stageName}</span>
+          Current stage: <span className="font-medium text-foreground">{liveStage}</span>
         </p>
         <p className="text-sm text-muted-foreground">
-          Constituency: <span className="font-medium text-foreground">{mockStageData.constituency}</span>
+          Constituency: <span className="font-medium text-foreground">{constituencyName}</span>
         </p>
+        {isCountingStage ? (
+          <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            <Circle className="h-3 w-3 animate-[pulse_1s_ease-in-out_infinite] fill-current" />
+            LIVE
+          </div>
+        ) : null}
+        {statusError ? <p className="mt-3 text-sm text-destructive">{statusError}</p> : null}
       </section>
 
-      <ChecklistContainer stage={mockStageData.stage} constituency={mockStageData.constituency} />
+      <ChecklistContainer stage={stageNumber} constituency={constituencyName} />
+
+      {isCountingStage ? (
+        <section className="mb-6 space-y-3 rounded-xl border bg-card p-4 sm:p-5">
+          <h2 className="text-lg font-semibold">Live Results</h2>
+          {liveResults.length > 0 ? (
+            <div className="space-y-3">
+              {liveResults.map((candidate) => (
+                <ResultCard key={`${candidate.name}-${candidate.party}`} candidate={candidate} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground">Results pending official update.</p>
+          )}
+        </section>
+      ) : null}
 
       <ComparisonCards homeCountry={homeCountry} />
 
       <section className="mt-6 space-y-3">
         <PulseCounter />
-        <MilestoneBadge stage={mockStageData.stage} personalCompletedCount={personalCompletedCount} />
+        <MilestoneBadge stage={stageNumber} personalCompletedCount={personalCompletedCount} />
         {pulseError ? <p className="text-sm text-destructive">Unable to update social pulse: {pulseError}</p> : null}
       </section>
     </main>
