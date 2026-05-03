@@ -1,23 +1,23 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { 
-  StageComparison, 
-  TranslatedComparison, 
-  PersonalisedActions 
+import {
+  StageComparison,
+  TranslatedComparison,
+  PersonalisedActions
 } from '@voteup/contracts';
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 export async function generateComparison(
-  homeCountryCode: string, 
-  newCountryCode: string, 
-  stageId: string, 
-  homeSystemName: string, 
+  homeCountryCode: string,
+  newCountryCode: string,
+  stageId: string,
+  homeSystemName: string,
   newSystemName: string
 ): Promise<StageComparison> {
   const prompt = `Compare the electoral systems of ${homeCountryCode} (${homeSystemName}) and ${newCountryCode} (${newSystemName}) for the stage '${stageId}'. Provide a summary for both and 3 key differences.`;
 
   const response = await ai.models.generateContent({
-    model: process.env.GEMINI_MODEL || 'gemini-1.5-pro-latest',
+    model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -51,14 +51,14 @@ export async function generateComparison(
 }
 
 export async function generateActions(
-  countryCode: string, 
-  stageId: string, 
+  countryCode: string,
+  stageId: string,
   stageName: string
 ): Promise<PersonalisedActions> {
   const prompt = `Generate personalized, actionable steps for a voter in ${countryCode} during the '${stageName}' (${stageId}) stage of their election. Return exactly 3 action items (prioritized) and 1 map location.`;
 
   const response = await ai.models.generateContent({
-    model: process.env.GEMINI_MODEL || 'gemini-1.5-pro-latest',
+    model: process.env.GEMINI_MODEL || 'gemini-1.5-flash',
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -107,7 +107,7 @@ export async function translateContent<T>(content: string, targetLang: string): 
   const prompt = `Translate the following JSON string into ${targetLang}. Preserve all JSON keys, structure, and formatting. Only translate the human-readable values. \n\n${content}`;
 
   const response = await ai.models.generateContent({
-    model: process.env.GEMINI_MODEL || 'gemini-1.5-pro-latest',
+    model: process.env.GEMINI_MODEL || 'gemini-1.5-flash',
     contents: prompt,
     config: {
       responseMimeType: "application/json"
@@ -119,9 +119,9 @@ export async function translateContent<T>(content: string, targetLang: string): 
 
 export async function streamQA(prompt: string, context: string, onToken: (token: string) => void): Promise<string> {
   const fullPrompt = `Context:\n${context}\n\nQuestion:\n${prompt}\n\nAnswer concisely based on the context:`;
-  
+
   const responseStream = await ai.models.generateContentStream({
-    model: process.env.GEMINI_MODEL || 'gemini-1.5-pro-latest',
+    model: process.env.GEMINI_MODEL || 'gemini-1.5-flash',
     contents: fullPrompt
   });
 

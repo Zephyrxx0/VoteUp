@@ -47,7 +47,7 @@ export class AICustomizer {
 
     const genAI = new GoogleGenerativeAI(apiKey);
     this.model = genAI.getGenerativeModel({
-      model: 'gemini-1.5-pro',
+      model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
       systemInstruction: SIMPLE_INSTRUCTION_SYSTEM_PROMPT,
       generationConfig: {
         responseMimeType: 'application/json',

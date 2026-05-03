@@ -29,7 +29,7 @@ export async function generateComparison(homeCountry: string): Promise<Compariso
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
-    model: 'gemini-1.5-pro',
+    model: process.env.GEMINI_MODEL || 'gemini-1.5-flash',
     generationConfig: {
       responseMimeType: 'application/json',
     },
