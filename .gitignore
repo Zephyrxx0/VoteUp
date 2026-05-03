@@ -1,8 +1,16 @@
-*.env
+# Environment files — NEVER commit real keys
+.env
+.env.local
+.env.production.local
+.env.development.local
+*.env.local
 !.env.example
+
+# Service account keys
 *service-account.json
+*serviceAccountKey.json
 
-
+# Agent / editor configs
 .agents/
 .agent/
 .claude/
@@ -15,16 +23,26 @@ AGENTS.md
 CLAUDE.md
 GEMINI.md
 
+# Planning & docs (keep out of public repo)
 .planning/
 .firecrawl/
 @.planning
 .entire/
 graphify-out/
 SPEC.md
+UPDATE.md
 
+# Build artifacts
 node_modules/
-apps/backend/dist/
+apps/api/dist/
+.next/
+out/
 *.log
 *.zip
 .DS_Store
 .turbo/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
