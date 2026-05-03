@@ -10,6 +10,7 @@ import geoRouter from './routes/geo.ts';
 import checklistRouter from './routes/checklist.ts';
 import pulseRouter from './routes/pulse.ts';
 import aiComparisonRouter from './routes/ai-comparison.ts';
+import statusRouter from './routes/status.ts';
 
 const app: Express = express();
 
@@ -25,5 +26,6 @@ app.use('/', geoRouter);
 app.use('/', checklistRouter);
 app.use('/api/pulse', pulseRouter);
 app.use('/', aiComparisonRouter);
+app.use('/api/constituency', statusRouter);
 
 export default app;

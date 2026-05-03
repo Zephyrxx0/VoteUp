@@ -14,6 +14,8 @@ const EIGHT_STAGES = [
 
 export type Stage = typeof EIGHT_STAGES[number];
 
+const DEFAULT_COUNTING_DATE = '2026-05-04T00:00:00.000Z';
+
 interface FirestoreInput {
   state: string;
   type: 'AC' | 'PC';
@@ -78,6 +80,42 @@ function mapToStage(dates: Record<string, string | undefined>): Stage {
   if (dates.scrutiny) return 'Scrutiny';
   if (dates.nominationLast) return 'Nomination Last Date';
   if (dates.notification) return 'Notification Issued';
+  return 'Not Scheduled';
+}
+
+export function resolveCurrentStage(dates: {
+  notification_date?: string;
+  nomination_last_date?: string;
+  scrutiny_date?: string;
+  withdrawal_date?: string;
+  polling_date?: string;
+  counting_date?: string;
+  result_date?: string;
+}, now = new Date()): Stage {
+  const checkpoints: Array<[keyof typeof dates, Stage]> = [
+    ['result_date', 'Result Declared'],
+    ['counting_date', 'Counting'],
+    ['polling_date', 'Polling'],
+    ['withdrawal_date', 'Withdrawal'],
+    ['scrutiny_date', 'Scrutiny'],
+    ['nomination_last_date', 'Nomination Last Date'],
+    ['notification_date', 'Notification Issued'],
+  ];
+
+  const countingDate = new Date(dates.counting_date ?? DEFAULT_COUNTING_DATE);
+  if (now >= countingDate) return 'Counting';
+
+  for (const [key, stage] of checkpoints) {
+    if (key === 'counting_date') continue;
+    const value = dates[key];
+    if (!value) continue;
+
+    const dt = new Date(value);
+    if (!Number.isNaN(dt.getTime()) && now >= dt) {
+      return stage;
+    }
+  }
+
   return 'Not Scheduled';
 }
 
