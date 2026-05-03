@@ -48,7 +48,15 @@ export function ElectionPipelineTracker() {
 
   if (!pipeline || stageEntries.length === 0) {
     return (
-      <section className="rounded-xl border bg-card p-5">
+      <section className="rounded-xl border bg-card p-5 text-center">
+        <div className="flex justify-center mb-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img 
+            src="https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e535e658e24935b1b096148_peep-sitting-4.svg" 
+            alt="Person sitting" 
+            className="h-32 opacity-80" 
+          />
+        </div>
         <h2 className="text-lg font-semibold">Election Pipeline</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           No pipeline data available for your selected country.

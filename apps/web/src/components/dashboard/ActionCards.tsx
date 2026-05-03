@@ -51,6 +51,9 @@ function ctaIcon(ctaType: string) {
   }
 }
 
+import { PAST_ELECTIONS_DATA } from "@/lib/mock-data";
+import { ChevronDown } from "lucide-react";
+
 function ActionCard({ item }: { item: ActionItem }) {
   const openMapDrawer = useUiStore((state) => state.openMapDrawer);
   const config = priorityConfig[item.priority] || priorityConfig.normal;
@@ -62,7 +65,6 @@ function ActionCard({ item }: { item: ActionItem }) {
     } else if (item.ctaType === "external_url" && typeof item.ctaPayload === "string") {
       window.open(item.ctaPayload, "_blank", "noopener");
     } else if (item.ctaType === "calendar_add") {
-      // Will be handled by CalendarSync component
       const event = new CustomEvent("voteup:calendar-add", { detail: item.ctaPayload });
       window.dispatchEvent(event);
     }
@@ -70,21 +72,21 @@ function ActionCard({ item }: { item: ActionItem }) {
 
   return (
     <article
-      className={`rounded-xl border p-4 transition-all hover:shadow-md ${config.bg}`}
+      className={`group relative overflow-hidden rounded-xl border p-5 transition-all hover:shadow-lg hover:border-civic-indigo ${config.bg}`}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex-1 space-y-1.5">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1 space-y-2">
           <div className="flex items-center gap-2">
             <Badge
               variant="secondary"
-              className={`text-[10px] font-semibold uppercase tracking-wider ${config.badge}`}
+              className={`text-[10px] font-bold uppercase tracking-widest ${config.badge}`}
             >
               <config.icon className="mr-1 h-3 w-3" />
               {config.label}
             </Badge>
           </div>
-          <h3 className="text-sm font-semibold text-foreground">{item.title}</h3>
-          <p className="text-xs leading-relaxed text-muted-foreground">
+          <h3 className="text-base font-bold text-foreground group-hover:text-civic-indigo transition-colors">{item.title}</h3>
+          <p className="text-xs leading-relaxed text-muted-foreground line-clamp-2 group-hover:line-clamp-none transition-all">
             {item.description}
           </p>
         </div>
@@ -93,7 +95,7 @@ function ActionCard({ item }: { item: ActionItem }) {
           <Button
             size="sm"
             variant="outline"
-            className="shrink-0 gap-1.5 text-xs"
+            className="shrink-0 gap-2 text-xs font-bold border-civic-border bg-white hover:bg-civic-indigo hover:text-white hover:border-civic-indigo transition-all"
             onClick={handleCta}
           >
             <CtaIcon className="h-3.5 w-3.5" />
@@ -101,9 +103,13 @@ function ActionCard({ item }: { item: ActionItem }) {
               ? "View Map"
               : item.ctaType === "calendar_add"
                 ? "Add to Calendar"
-                : "Open"}
+                : "Open Link"}
           </Button>
         )}
+      </div>
+      {/* Subtle background decoration */}
+      <div className="absolute -right-4 -bottom-4 h-16 w-16 opacity-10 group-hover:opacity-20 transition-all group-hover:scale-125">
+        <CtaIcon className="h-full w-full" />
       </div>
     </article>
   );
@@ -120,13 +126,35 @@ export function ActionCards() {
     }
   }, [activeStage?.stageId, fetchActions]);
 
-  if (!actions) {
+  if (!actions || actions.items.length === 0) {
     return (
-      <section className="rounded-xl border bg-card p-5">
-        <h2 className="text-lg font-semibold">Personalised Actions</h2>
-        <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-          <Loader2 className="h-4 w-4 animate-spin" />
-          Generating your action plan…
+      <section className="rounded-xl border bg-card p-6 text-center">
+        <div className="flex justify-center mb-6">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img 
+            src="https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536281c992503d98cecdc1_peep-standing-19.svg" 
+            alt="Person with megaphone" 
+            className="h-32 opacity-80" 
+          />
+        </div>
+        <h2 className="text-xl font-bold">No Active Actions</h2>
+        <p className="mt-2 text-sm text-muted-foreground max-w-sm mx-auto">
+          There are no live actions for the current election stage. You can explore previous major elections to see how they progressed.
+        </p>
+        
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Select Previous Election</p>
+          <div className="relative w-full max-w-xs">
+            <select className="w-full appearance-none rounded-lg border border-civic-border bg-civic-muted-bg/20 px-4 py-2.5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-civic-indigo pr-10">
+              {PAST_ELECTIONS_DATA.map(e => (
+                <option key={e.id} value={e.id}>{e.name} ({e.region})</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+          </div>
+          <Button variant="outline" className="mt-2 text-xs font-bold border-civic-indigo text-civic-indigo hover:bg-civic-indigo hover:text-white">
+            View Election Info
+          </Button>
         </div>
       </section>
     );

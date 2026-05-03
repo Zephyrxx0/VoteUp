@@ -21,21 +21,17 @@ export function ComparisonPanel() {
 
   const differences = useMemo(() => comparison?.keyDifferences ?? [], [comparison]);
 
-  if (comparisonLoading) {
+  if (comparisonLoading || !comparison) {
     return (
-      <section className="rounded-xl border bg-card p-5">
-        <h2 className="text-lg font-semibold">System Comparison</h2>
-        <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-          <Loader2 className="h-4 w-4 animate-spin" />
-          Comparing election systems…
+      <section className="rounded-xl border bg-card p-5 text-center">
+        <div className="flex justify-center mb-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img 
+            src="https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536210c67e798fb29b1e94_peep-standing-15.svg" 
+            alt="Person with laptop" 
+            className="h-32 opacity-80" 
+          />
         </div>
-      </section>
-    );
-  }
-
-  if (!comparison) {
-    return (
-      <section className="rounded-xl border bg-card p-5">
         <h2 className="text-lg font-semibold">System Comparison</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Select your home and destination countries to see a comparison.
@@ -54,41 +50,85 @@ export function ComparisonPanel() {
       </p>
 
       {/* Summary cards */}
-      <div className="mt-4 grid gap-3 md:grid-cols-2">
-        <div className="rounded-lg border bg-civic-indigo-pale/50 p-4">
-          <p className="text-xs font-medium uppercase tracking-wider text-civic-indigo">
-            🏠 Home ({comparison.homeCountryCode})
-          </p>
-          <p className="mt-2 text-sm leading-relaxed text-foreground">
+      <div className="mt-5 grid gap-4 md:grid-cols-2">
+        <div className="group relative overflow-hidden rounded-xl border bg-civic-muted-bg/20 p-5 transition-all hover:border-civic-indigo hover:shadow-md">
+          <div className="flex items-start justify-between">
+            <div className="space-y-1">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-civic-indigo">
+                🏠 Home System
+              </p>
+              <h3 className="text-sm font-bold text-foreground">{comparison.homeCountryCode}</h3>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e5360ba550b761a0bfabd32_peep-standing-4.svg" 
+              alt="Home peep" 
+              className="h-14 opacity-60 grayscale transition-all group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110" 
+            />
+          </div>
+          <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
             {comparison.homeSummary}
           </p>
+          <a href="https://electionresults.info/" target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-0" />
         </div>
-        <div className="rounded-lg border bg-civic-coral-pale/50 p-4">
-          <p className="text-xs font-medium uppercase tracking-wider text-civic-coral">
-            🌍 New Country ({comparison.newCountryCode})
-          </p>
-          <p className="mt-2 text-sm leading-relaxed text-foreground">
+
+        <div className="group relative overflow-hidden rounded-xl border bg-civic-muted-bg/20 p-5 transition-all hover:border-civic-coral hover:shadow-md">
+          <div className="flex items-start justify-between">
+            <div className="space-y-1">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-civic-coral">
+                🌍 New System
+              </p>
+              <h3 className="text-sm font-bold text-foreground">{comparison.newCountryCode}</h3>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/5e536281c992503d98cecdc1_peep-standing-19.svg" 
+              alt="New peep" 
+              className="h-14 opacity-60 grayscale transition-all group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110" 
+            />
+          </div>
+          <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
             {comparison.newSummary}
           </p>
+          <a href="https://electionresults.info/" target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-0" />
         </div>
       </div>
 
       {/* Key differences */}
       {differences.length > 0 && (
-        <div className="mt-4 space-y-2">
-          <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-            Key Differences
-          </h3>
-          {differences.map((diff, i) => (
-            <div
-              key={i}
-              className="grid grid-cols-[1fr_1fr_1fr] gap-2 rounded-lg border p-3 text-xs"
-            >
-              <span className="font-semibold text-foreground">{diff.dimension}</span>
-              <span className="text-civic-indigo">{diff.homeValue}</span>
-              <span className="text-civic-coral">{diff.newValue}</span>
-            </div>
-          ))}
+        <div className="mt-8">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+            <h3 className="text-[11px] font-bold text-muted-foreground uppercase tracking-[0.2em] whitespace-nowrap">
+              Structural Gaps
+            </h3>
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          </div>
+          <div className="grid gap-4">
+            {differences.map((diff, i) => (
+              <div
+                key={i}
+                className="group relative overflow-hidden rounded-xl border bg-white p-4 transition-all hover:border-civic-indigo hover:shadow-sm"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex-1">
+                    <p className="text-[10px] font-bold uppercase text-muted-foreground mb-1 tracking-wider">{diff.dimension}</p>
+                    <div className="h-1 w-8 bg-civic-indigo/20 rounded-full group-hover:w-12 transition-all" />
+                  </div>
+                  <div className="flex-[2] grid grid-cols-2 gap-0 divide-x border rounded-lg overflow-hidden bg-muted/30">
+                    <div className="p-3 space-y-1">
+                      <p className="text-[9px] font-bold text-civic-indigo uppercase tracking-tight">Home System</p>
+                      <p className="text-xs font-semibold text-foreground leading-tight">{diff.homeValue}</p>
+                    </div>
+                    <div className="p-3 space-y-1 bg-white">
+                      <p className="text-[9px] font-bold text-civic-coral uppercase tracking-tight">New System</p>
+                      <p className="text-xs font-semibold text-foreground leading-tight">{diff.newValue}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </section>

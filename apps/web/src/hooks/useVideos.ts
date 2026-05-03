@@ -14,7 +14,7 @@ export function useVideos() {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/videos?countryCode=${profile.newCountry}&stageId=${activeStage.stageId}`
+        `/api/videos?countryCode=${encodeURIComponent(profile.newCountry)}&stageId=${encodeURIComponent(activeStage.stageId)}`
       );
 
       if (!response.ok) throw new Error('Failed to fetch videos');
