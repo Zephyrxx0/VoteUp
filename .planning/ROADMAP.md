@@ -63,6 +63,21 @@ Goal: Live election results scraping and real-time dashboard updates for Countin
 **Wave 3 (Blocked on Wave 1)**
 - [ ] 05-03-PLAN.md — Firebase Finalization & Polish
 
+### Phase 6: User Profiles & Persistence
+Goal: Add user profiles, voting history, and persistent badges with client-side encryption.
+**Requirements:** [PRF-01, PRF-02, PRF-03]
+
+**Plans:** 6 plans
+**Wave 1**
+- [ ] 06-01-PLAN.md — Encryption Utility (TDD)
+- [ ] 06-02-PLAN.md — Firestore Schema & User Service
+**Wave 2**
+- [ ] 06-03-PLAN.md — Auth Upgrading & Account Linking
+- [ ] 06-04-PLAN.md — Profile View & Dashboard Integration
+**Wave 3**
+- [ ] 06-05-PLAN.md — Persistence Sync Component (TDD)
+- [ ] 06-06-PLAN.md — Privacy Controls & Cleanup
+
 ---
 ## Requirement Registry
 
@@ -82,3 +97,6 @@ Goal: Live election results scraping and real-time dashboard updates for Countin
 | RES-03 | Mobile-first Result Card visualization |
 | RES-04 | Live dashboard updates with stage indicator |
 | RES-05 | Finalized Firestore sync and demo polish |
+| PRF-01 | Secure User Profile store with encryption |
+| PRF-02 | Google account linking for badge sync |
+| PRF-03 | Stage-level journey history tracking |
