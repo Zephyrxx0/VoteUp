@@ -1,4 +1,5 @@
 import { PEEPS } from "@/lib/landing-data";
+import { Link } from "@/navigation";
 
 export function CTASection() {
   return (
@@ -23,18 +24,18 @@ export function CTASection() {
 
         {/* CTA buttons */}
         <div className="reveal mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <a
-            href="#"
+          <Link
+            href="/dashboard"
             className="group inline-flex items-center gap-2 rounded-xl bg-white px-10 py-4 text-lg font-medium text-civic-indigo transition-all hover:bg-civic-coral hover:text-white hover:scale-[1.02] active:scale-[0.98]"
           >
-            Get Started — It&apos;s Free
-          </a>
-          <a
-            href="#pipeline-demo"
+            Go to Dashboard
+          </Link>
+          <Link
+            href="/dashboard"
             className="inline-flex items-center gap-1 text-base text-white underline-offset-4 transition-colors hover:underline"
           >
             See the dashboard <span aria-hidden="true">→</span>
-          </a>
+          </Link>
         </div>
 
         {/* Trust strip */}
@@ -44,25 +45,25 @@ export function CTASection() {
       </div>
 
       {/* Peep — standing left */}
-      <div className="absolute bottom-0 left-8 hidden lg:block">
+      <div className="absolute bottom-0 left-8 hidden lg:block pointer-events-none">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={PEEPS.standingWoman6}
-          alt="Illustrated full-body character on the left side of the call to action"
-          className="h-[220px] w-auto opacity-15"
-          style={{ filter: "brightness(2) saturate(0)" }}
+          alt="Illustrated character"
+          className="h-[220px] w-auto opacity-50"
+          style={{ filter: "brightness(1.5) saturate(0.5) sepia(0.2)" }}
           loading="lazy"
         />
       </div>
 
       {/* Peep — standing right */}
-      <div className="absolute bottom-0 right-8 hidden lg:block">
+      <div className="absolute bottom-0 right-8 hidden lg:block pointer-events-none">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={PEEPS.standingMan5}
-          alt="Illustrated full-body character on the right side"
-          className="h-[200px] w-auto opacity-15 -scale-x-100"
-          style={{ filter: "brightness(2) saturate(0)" }}
+          alt="Illustrated character"
+          className="h-[200px] w-auto opacity-50 -scale-x-100"
+          style={{ filter: "brightness(1.5) saturate(0.5) sepia(0.2)" }}
           loading="lazy"
         />
       </div>

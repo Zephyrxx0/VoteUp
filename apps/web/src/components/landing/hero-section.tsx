@@ -1,7 +1,14 @@
+'use client';
+
 import { PEEPS } from "@/lib/landing-data";
 import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
 
 export function HeroSection() {
+  const t = useTranslations('hero');
+  const commonT = useTranslations('common');
+
   return (
     <section
       id="hero"
@@ -29,7 +36,7 @@ export function HeroSection() {
               variant="default"
               className="w-fit rounded-full bg-civic-indigo px-3 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-white"
             >
-              ✦ Built for new citizens · Globally
+              {t("eyebrow")}
             </Badge>
           </div>
 
@@ -43,7 +50,7 @@ export function HeroSection() {
                 className="block text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.1] text-civic-text"
                 style={{ fontFamily: "var(--font-lora)" }}
               >
-                Your new country
+                {t("headline_top")}
               </span>
               <span
                 className="animate-fade-up block text-[clamp(2.5rem,5vw,4rem)] font-bold italic leading-[1.1] text-civic-indigo"
@@ -52,7 +59,7 @@ export function HeroSection() {
                   animationDelay: "200ms",
                 }}
               >
-                is having an election.
+                {t("headline_bottom")}
               </span>
             </h1>
             <p
@@ -63,7 +70,7 @@ export function HeroSection() {
                 animationDelay: "300ms",
               }}
             >
-              We&apos;ll explain every step.
+              {t("subheadline")}
             </p>
           </div>
 
@@ -72,10 +79,7 @@ export function HeroSection() {
             className="animate-fade-up max-w-[480px] text-lg font-light leading-relaxed text-civic-text-secondary"
             style={{ animationDelay: "400ms", lineHeight: 1.75 }}
           >
-            VoteUp shows you the election process unfolding live — and explains
-            every stage through the lens of the democracy you already know. From
-            Nigeria to Canada. From India to the UK. From anywhere, to
-            everywhere.
+            {t("lead")}
           </p>
 
           {/* CTA cluster */}
@@ -83,23 +87,23 @@ export function HeroSection() {
             className="animate-fade-up flex flex-col gap-3 sm:flex-row sm:items-center"
             style={{ animationDelay: "500ms" }}
           >
-            <a
-              href="#cta"
-              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-civic-coral px-8 py-3.5 text-base font-medium text-white transition-all hover:bg-civic-coral-light hover:scale-[1.02] active:scale-[0.98]"
+            <Link
+              href="/dashboard"
+              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-civic-coral px-8 py-3.5 text-base font-medium text-white transition-all hover:bg-civic-coral-light hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-coral-100"
             >
-              Get started — it&apos;s free
+              {t("cta_primary")}
               <span
                 className="inline-block transition-transform group-hover:translate-x-1"
                 aria-hidden="true"
               >
                 →
               </span>
-            </a>
+            </Link>
             <a
               href="#how-it-works"
               className="inline-flex items-center justify-center gap-1 text-base text-civic-indigo transition-colors hover:underline hover:underline-offset-4"
             >
-              See how it works <span aria-hidden="true">↓</span>
+              {t("cta_secondary")} <span aria-hidden="true">↓</span>
             </a>
           </div>
 
@@ -108,15 +112,15 @@ export function HeroSection() {
             className="animate-fade-up flex flex-wrap items-center gap-2 pt-2 font-mono text-xs text-civic-text-muted"
             style={{ animationDelay: "600ms" }}
           >
-            <span>🌍 281M migrants worldwide</span>
+            <span>🌍 {t("social_migrants")}</span>
             <span className="text-civic-border" aria-hidden="true">
               ·
             </span>
-            <span>🗳️ 50+ destination countries</span>
+            <span>🗳️ {t("social_countries")}</span>
             <span className="text-civic-border" aria-hidden="true">
               ·
             </span>
-            <span>🌐 Available in 22 languages</span>
+            <span>🌐 {t("social_languages")}</span>
           </div>
         </div>
 
@@ -193,10 +197,10 @@ export function HeroSection() {
             <div className="mt-2 flex items-center gap-1.5">
               <span className="animate-live-dot inline-block h-2 w-2 rounded-full bg-civic-coral" />
               <span className="font-mono text-[10px] font-medium text-civic-coral">
-                LIVE
+                {commonT("live")}
               </span>
               <span className="font-mono text-[10px] text-civic-text-muted">
-                · Campaign Period · 21 days left
+                · {t("card.period")} · 21 {t("card.daysLeft")}
               </span>
             </div>
 
@@ -223,32 +227,33 @@ export function HeroSection() {
             {/* Card actions */}
             <div className="mt-4 flex items-center gap-2">
               <button className="flex items-center gap-1 rounded-lg border border-civic-border px-3 py-1.5 font-mono text-[11px] text-civic-text-secondary transition-colors hover:border-civic-indigo hover:text-civic-indigo">
-                📅 Add to Calendar
+                📅 {t("card.calendar")}
               </button>
               <button className="flex items-center gap-1 rounded-lg border border-civic-border px-3 py-1.5 font-mono text-[11px] text-civic-text-secondary transition-colors hover:border-civic-indigo hover:text-civic-indigo">
-                📍 My Booth
+                📍 {t("card.booth")}
               </button>
             </div>
           </div>
 
           {/* Peep — standing Adaeze, full body */}
-          <div className="absolute -bottom-16 -right-6 z-20 animate-peep-float">
+          <div className="absolute -bottom-16 -right-6 z-20 animate-peep-float pointer-events-none">
             {/* Speech bubble */}
-            <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-xl bg-white px-3 py-1.5 shadow-sm">
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-xl bg-white px-3 py-1.5 shadow-sm border border-civic-border/50">
               <p
                 className="text-xs italic text-civic-text"
                 style={{ fontFamily: "var(--font-lora)" }}
               >
-                &ldquo;I understand my vote now&rdquo;
+                &ldquo;{t("peep_quote")}&rdquo;
               </p>
               {/* Bubble tail */}
-              <div className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-white" />
+              <div className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-white border-b border-r border-civic-border/50" />
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={PEEPS.standingWoman1}
-              alt="Illustrated full-body character of Adaeze, a new citizen from Nigeria now living in Canada"
-              className="h-[320px] w-auto drop-shadow-[8px_12px_0px_rgba(45,43,107,0.08)]"
+              alt="Illustrated character"
+              className="h-[320px] w-auto drop-shadow-[8px_12px_0px_rgba(45,43,107,0.12)] opacity-95"
+              style={{ filter: "brightness(1.05) saturate(0.9) sepia(0.05)" }}
               loading="eager"
             />
           </div>

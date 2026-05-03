@@ -58,29 +58,31 @@ export function CommunitySection() {
           right now.
         </p>
 
-        <div className="mt-12 flex flex-col gap-12 lg:flex-row lg:gap-16">
-          {/* Left — activity feed */}
-          <div className="lg:w-[60%]" ref={feedRef}>
-            <div className="flex flex-col gap-3">
+        <div className="mt-12 flex flex-col gap-16">
+          {/* Top — activity feed */}
+          <div className="w-full" ref={feedRef}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {visibleItems.map((item, i) => (
                 <div
                   key={`${item.flags}-${item.time}-${i}`}
                   className={`animate-slide-in rounded-xl border border-civic-border border-l-[3px] ${borderColor(
                     item.type
-                  )} bg-civic-card p-3.5`}
+                  )} bg-civic-card p-4 shadow-sm transition-all hover:shadow-md`}
                   style={{ animationDelay: `${i * 100}ms` }}
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-start gap-2.5">
-                      <span className="text-lg leading-none">
+                    <div className="flex items-start gap-3">
+                      <span className="text-xl leading-none">
                         {item.flags.split("→")[0]}
                       </span>
-                      <p className="text-[13px] text-civic-text">
-                        <span className="font-mono text-xs text-civic-text-muted">
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-wider text-civic-text-muted">
                           {item.flags}
-                        </span>{" "}
-                        {item.text}
-                      </p>
+                        </p>
+                        <p className="mt-1 text-[14px] leading-snug text-civic-text">
+                          {item.text}
+                        </p>
+                      </div>
                     </div>
                     <span className="shrink-0 font-mono text-[11px] text-civic-text-muted">
                       {item.time}
@@ -91,65 +93,67 @@ export function CommunitySection() {
             </div>
           </div>
 
-          {/* Right — stats */}
-          <div className="lg:w-[40%]">
-            <div className="flex flex-col gap-8">
+          {/* Bottom — stats horizontal */}
+          <div className="w-full border-t border-civic-border pt-16">
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:gap-20">
               {[
                 { number: "281M", label: "People globally in your situation" },
                 { number: "50+", label: "Destination countries supported" },
                 { number: "22", label: "Languages available instantly" },
-              ].map((stat, i, arr) => (
-                <div key={stat.number}>
-                  <div className="reveal">
-                    <p
-                      className="text-[clamp(3rem,6vw,5.5rem)] font-bold leading-none text-civic-indigo"
-                      style={{ fontFamily: "var(--font-lora)" }}
-                    >
-                      {stat.number}
-                    </p>
-                    <p className="mt-2 max-w-[160px] text-sm font-light leading-snug text-civic-text-secondary">
-                      {stat.label}
-                    </p>
-                  </div>
-                  {i < arr.length - 1 && (
-                    <Separator className="mt-8 bg-civic-border" />
-                  )}
+              ].map((stat) => (
+                <div key={stat.number} className="reveal text-center md:text-left">
+                  <p
+                    className="text-[clamp(3rem,6vw,5rem)] font-bold leading-none text-civic-indigo"
+                    style={{ fontFamily: "var(--font-lora)" }}
+                  >
+                    {stat.number}
+                  </p>
+                  <p className="mt-3 text-base font-light leading-relaxed text-civic-text-secondary max-w-[200px] mx-auto md:mx-0">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
+            </div>
 
-              {/* Peep avatar stack */}
-              <div className="mt-4">
-                <div className="flex items-center">
-                  {[
-                    PEEPS.bust1,
-                    PEEPS.bust2,
-                    PEEPS.bust3,
-                    PEEPS.bust4,
-                    PEEPS.bust5,
-                  ].map((peep, i) => (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
-                      key={peep}
-                      src={peep}
-                      alt=""
-                      width={48}
-                      height={48}
-                      className="h-12 w-12 rounded-full border-2 border-civic-card bg-civic-indigo-pale object-cover shadow-sm"
-                      style={{
-                        marginLeft: i > 0 ? "-12px" : "0",
-                        filter: "sepia(0.2) hue-rotate(200deg)",
-                        zIndex: 5 - i,
-                        position: "relative",
-                      }}
-                      loading="lazy"
-                    />
-                  ))}
+            {/* Peep avatar stack & social proof */}
+            <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-civic-border/50 pt-10 md:flex-row">
+              <div className="flex items-center">
+                {[
+                  PEEPS.bust1,
+                  PEEPS.bust2,
+                  PEEPS.bust3,
+                  PEEPS.bust4,
+                  PEEPS.bust5,
+                ].map((peep, i) => (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    key={peep}
+                    src={peep}
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 rounded-full border-4 border-civic-muted-bg bg-civic-indigo-pale object-cover shadow-sm"
+                    style={{
+                      marginLeft: i > 0 ? "-16px" : "0",
+                      filter: "sepia(0.1) hue-rotate(200deg)",
+                      zIndex: 10 - i,
+                      position: "relative",
+                    }}
+                    loading="lazy"
+                  />
+                ))}
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-civic-text">
+                    Join the community
+                  </p>
+                  <p className="text-xs text-civic-text-muted">
+                    Active citizens across 50+ countries
+                  </p>
                 </div>
-                <p className="mt-2 text-xs text-civic-text-muted">
-                  People navigating their first vote in a new democracy — like
-                  you.
-                </p>
               </div>
+              <p className="max-w-[300px] text-center text-sm italic text-civic-text-secondary md:text-right">
+                &ldquo;You are not just a voter, you are a participant in a global movement for democracy.&rdquo;
+              </p>
             </div>
           </div>
         </div>

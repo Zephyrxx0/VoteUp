@@ -26,7 +26,7 @@ GEMINI.md
 # Planning & docs (keep out of public repo)
 .planning/
 .firecrawl/
-@.planning
+agent_adk/
 .entire/
 graphify-out/
 SPEC.md

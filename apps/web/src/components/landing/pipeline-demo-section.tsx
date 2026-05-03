@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PIPELINE_STAGES, PIPELINE_DATA, PEEPS } from "@/lib/landing-data";
+import { Carousel } from "@/components/carousel";
 
 const COUNTRY_PAIRS = [
   { key: "NG-CA", label: "Nigeria → Canada", fromFlag: "🇳🇬", toFlag: "🇨🇦" },
@@ -17,14 +18,10 @@ export function PipelineDemoSection() {
   const pipelineInfo = PIPELINE_DATA[selectedPair];
   const activeIndex = pipelineInfo?.activeIndex ?? 2;
 
-  const handleStageClick = (index: number) => {
-    setSelectedStage(selectedStage === index ? null : index);
-  };
-
   return (
     <section
       id="pipeline-demo"
-      className="relative bg-civic-dark py-24"
+      className="relative bg-civic-dark py-24 overflow-visible z-10"
       aria-label="Live pipeline demo"
     >
       <div className="mx-auto max-w-[800px] px-4 lg:px-6">
@@ -65,111 +62,117 @@ export function PipelineDemoSection() {
           ))}
         </div>
 
-        {/* Pipeline */}
-        <div className="reveal mt-10">
-          <div className="snap-scroll-x flex items-center gap-2 pb-2 lg:flex-wrap lg:overflow-visible">
-            {PIPELINE_STAGES.map((stage, i) => {
-              const isCompleted = i < activeIndex;
-              const isActive = i === activeIndex;
-              const isUpcoming = i > activeIndex;
-              const isSelected = selectedStage === i;
-
-              return (
-                <div key={stage} className="flex shrink-0 items-center gap-2">
-                  <button
-                    onClick={() => handleStageClick(i)}
-                    className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-2 font-mono text-xs transition-all focus:outline-none focus:ring-2 focus:ring-civic-coral focus:ring-offset-2 focus:ring-offset-civic-dark ${
-                      isCompleted
-                        ? "border border-civic-green/30 bg-civic-green/20 text-[#5EC499]"
-                        : isActive
-                        ? "animate-pulse-ring bg-civic-coral text-white"
-                        : "border border-dashed border-white/20 text-white/40"
-                    } ${isSelected ? "ring-2 ring-civic-coral ring-offset-2 ring-offset-civic-dark" : ""}`}
-                    role="button"
-                    aria-label={`${stage} stage, ${
-                      isCompleted
-                        ? "completed"
-                        : isActive
-                        ? "currently active"
-                        : "upcoming"
-                    }`}
-                    tabIndex={0}
-                  >
-                    {isCompleted && <span>✓</span>}
-                    {isActive && (
-                      <span className="animate-live-dot inline-block h-1.5 w-1.5 rounded-full bg-white" />
-                    )}
-                    {stage}
-                    {isActive && (
-                      <span className="ml-1 rounded bg-white/20 px-1.5 py-0.5 text-[9px] font-medium">
-                        LIVE
-                      </span>
-                    )}
-                  </button>
-                  {i < PIPELINE_STAGES.length - 1 && (
-                    <div
-                      className="hidden h-px w-4 bg-white/15 lg:block"
-                      aria-hidden="true"
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Stage detail panel */}
-          {selectedStage !== null && pipelineInfo?.comparisons[selectedStage] && (
-            <div className="mt-6 animate-slide-in rounded-2xl border border-white/10 bg-white/5 p-6">
-              <h3
-                className="text-xl italic text-white"
-                style={{ fontFamily: "var(--font-lora)" }}
+        {/* Pipeline Carousel */}
+        <div className="reveal mt-12">
+          <Carousel
+            slides={PIPELINE_STAGES.map((stage, i) => (
+              <div
+                key={`${selectedPair}-${stage}`}
+                className="w-full min-h-[300px] rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm"
               >
-                {pipelineInfo.comparisons[selectedStage].stageName}
-              </h3>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <div className="rounded-xl bg-white/5 p-4">
-                  <p className="font-mono text-xs font-medium text-civic-coral">
-                    {COUNTRY_PAIRS.find((p) => p.key === selectedPair)
-                      ?.fromFlag ?? ""}{" "}
-                    Home Country
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-white/70">
-                    {pipelineInfo.comparisons[selectedStage].home}
-                  </p>
+                <div className="flex items-center justify-between mb-6">
+                  <h3
+                    className="text-2xl italic text-white"
+                    style={{ fontFamily: "var(--font-lora)" }}
+                  >
+                    {pipelineInfo?.comparisons[i]?.stageName ?? stage}
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 animate-pulse rounded-full bg-civic-coral" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-civic-coral">
+                      Stage {i + 1}
+                    </span>
+                  </div>
                 </div>
-                <div className="rounded-xl bg-white/5 p-4">
-                  <p className="font-mono text-xs font-medium text-civic-green">
-                    {COUNTRY_PAIRS.find((p) => p.key === selectedPair)
-                      ?.toFlag ?? ""}{" "}
-                    New Country
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-white/70">
-                    {pipelineInfo.comparisons[selectedStage].new_}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
 
-          {selectedStage !== null &&
-            !pipelineInfo?.comparisons[selectedStage] && (
-              <div className="mt-6 animate-slide-in rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
-                <p className="text-sm text-white/50">
-                  Comparison data for this stage and country pair coming soon.
-                </p>
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div className="space-y-3 rounded-xl bg-white/[0.03] p-5 transition-colors hover:bg-white/[0.05]">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">
+                        {COUNTRY_PAIRS.find((p) => p.key === selectedPair)
+                          ?.fromFlag ?? ""}
+                      </span>
+                      <p className="font-mono text-[10px] uppercase tracking-widest text-white/40">
+                        Home Procedure
+                      </p>
+                    </div>
+                    <p className="text-[15px] leading-relaxed text-white/80">
+                      {pipelineInfo?.comparisons[i]?.home ??
+                        "Standard procedure details coming soon for this stage."}
+                    </p>
+                  </div>
+
+                  <div className="space-y-3 rounded-xl border border-civic-green/20 bg-civic-green/5 p-5 transition-colors hover:bg-civic-green/10">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">
+                        {COUNTRY_PAIRS.find((p) => p.key === selectedPair)
+                          ?.toFlag ?? ""}
+                      </span>
+                      <p className="font-mono text-[10px] uppercase tracking-widest text-civic-green/60">
+                        New System
+                      </p>
+                    </div>
+                    <p className="text-[15px] leading-relaxed text-white/90">
+                      {pipelineInfo?.comparisons[i]?.new_ ??
+                        "Comparative analysis for the new country is currently being finalized."}
+                    </p>
+                  </div>
+                </div>
               </div>
-            )}
+            ))}
+            thumbnails={PIPELINE_STAGES.map((stage, i) => (
+              <div
+                key={stage}
+                className={`flex h-full w-full flex-col items-center justify-center p-2 text-[10px] font-bold uppercase tracking-tighter ${
+                  i < activeIndex
+                    ? "text-civic-green"
+                    : i === activeIndex
+                    ? "text-civic-coral"
+                    : "text-white/40"
+                }`}
+              >
+                <span>{stage}</span>
+                {i === activeIndex && (
+                  <span className="mt-0.5 rounded-[2px] bg-civic-coral/20 px-1 text-[8px] text-civic-coral">
+                    LIVE
+                  </span>
+                )}
+              </div>
+            ))}
+            showArrows={false}
+            showDots={false}
+            showProgress={false}
+            autoplayDelay={0}
+            options={{ loop: false, align: "start" }}
+          />
         </div>
       </div>
 
-      {/* Peep at boundary — standing, watching */}
-      <div className="absolute -bottom-16 left-8 hidden lg:block">
+      {/* Peeps at boundary — seamlessly integrated across sections */}
+      <div className="absolute -bottom-24 left-10 hidden lg:block overflow-visible z-30 pointer-events-none">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={PEEPS.standingWoman5}
-          alt="Illustrated full-body character observing the election pipeline"
-          className="h-[200px] w-auto opacity-30"
-          style={{ filter: "brightness(2) saturate(0)" }}
+          alt="Illustrated character observing"
+          className="h-[360px] w-auto opacity-80 transition-all duration-700"
+          style={{ 
+            filter: "brightness(1.1) saturate(0.7) sepia(0.1)",
+            transform: "rotate(-2deg)" 
+          }}
+          loading="lazy"
+        />
+      </div>
+
+      <div className="absolute -bottom-32 right-12 hidden lg:block overflow-visible z-30 pointer-events-none">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={PEEPS.sittingWoman1}
+          alt="Illustrated character sitting"
+          className="h-[340px] w-auto opacity-75 transition-all duration-700"
+          style={{ 
+            filter: "brightness(1.1) saturate(0.6) sepia(0.2)",
+            transform: "rotate(2deg) scaleX(-1)" 
+          }}
           loading="lazy"
         />
       </div>

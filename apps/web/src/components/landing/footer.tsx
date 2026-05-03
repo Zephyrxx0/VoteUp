@@ -1,118 +1,88 @@
-import { Separator } from "@/components/ui/separator";
+'use client';
+
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/navigation";
+
+const NAV_COLUMNS = [
+  {
+    title: "Product",
+    links: [
+      { label: "Features", href: "/#features" },
+      { label: "Dashboard", href: "/dashboard" },
+      { label: "Guide", href: "/election-guide" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Community", href: "/#community" },
+      { label: "How it works", href: "/#how-it-works" },
+    ],
+  },
+  {
+    title: "Legals",
+    links: [
+      { label: "Privacy Policy", href: "#" },
+      { label: "Terms of Service", href: "#" },
+    ],
+  },
+] as const;
 
 export function Footer() {
+  const t = useTranslations('navbar');
+  const locale = useLocale();
+
   return (
-    <footer className="bg-civic-dark py-16" role="contentinfo">
+    <footer className="border-t border-civic-border bg-[#FDFDFF] py-16 lg:py-24">
       <div className="mx-auto max-w-[1200px] px-4 lg:px-6">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Column 1 — Logo + tagline */}
-          <div>
-            <p
-              className="text-xl font-bold italic text-civic-text-inverse"
+        <div className="grid grid-cols-2 gap-10 lg:grid-cols-4 lg:gap-20">
+          {/* Brand col */}
+          <div className="col-span-2 lg:col-span-1">
+            <Link
+              href="/"
+              className="flex items-center gap-1.5 text-2xl font-bold italic text-civic-indigo"
               style={{ fontFamily: "var(--font-lora)" }}
             >
-              <span className="text-civic-coral">✦</span> VoteUp
-            </p>
-            <p
-              className="mt-2 text-sm italic text-white/50"
-              style={{ fontFamily: "var(--font-lora)" }}
-            >
-              The election process, mirrored for a new world.
-            </p>
-            <p className="mt-4 font-mono text-[11px] text-white/30">
-              Google Prompt Wars 2026
+              <span className="text-civic-coral font-bold not-italic">✦</span>
+              <span>VoteUp</span>
+            </Link>
+            <p className="mt-6 text-sm leading-relaxed text-civic-text-secondary opacity-80">
+              Empowering global citizens through transparent, localized, and
+              interactive election insights.
             </p>
           </div>
 
-          {/* Column 2 — Product */}
-          <div>
-            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/40">
-              Product
-            </p>
-            <ul className="flex flex-col gap-2.5">
-              {[
-                "How it works",
-                "Supported countries",
-                "22 Languages",
-                "Dashboard",
-              ].map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="text-sm text-white/60 transition-colors hover:text-white"
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3 — Open Source */}
-          <div>
-            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/40">
-              Open Source
-            </p>
-            <ul className="flex flex-col gap-2.5">
-              {[
-                "Built with Google AI",
-                "Open Peeps by Pablo Stanley (CC0)",
-                "Powered by Gemini 1.5 Pro",
-                "Firebase · Vertex AI · Maps",
-              ].map((link) => (
-                <li key={link}>
-                  <span className="text-sm text-white/60">{link}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4 — Get Started */}
-          <div>
-            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/40">
-              Get Started
-            </p>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 rounded-xl bg-civic-coral px-6 py-3 text-sm font-medium text-white transition-all hover:bg-civic-coral-light hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Get Started — Free
-            </a>
-            <div className="mt-4">
-              <button className="flex items-center gap-1.5 font-mono text-xs text-white/40 transition-colors hover:text-white/60">
-                🌐 Language: English
-              </button>
+          {/* Links cols */}
+          {NAV_COLUMNS.map((col) => (
+            <div key={col.title}>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-civic-text opacity-40">
+                {col.title}
+              </h3>
+              <ul className="mt-6 space-y-4">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-civic-text-secondary transition-colors hover:text-civic-indigo"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          ))}
         </div>
 
-        {/* Bottom bar */}
-        <Separator className="my-10 bg-white/10" />
-
-        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="font-mono text-[11px] text-white/30">
-            © 2026 VoteUp
-          </p>
-          <div className="flex items-center gap-4">
-            <a
-              href="#"
-              className="font-mono text-[11px] text-white/30 transition-colors hover:text-white/50"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="#"
-              className="font-mono text-[11px] text-white/30 transition-colors hover:text-white/50"
-            >
-              Terms
-            </a>
-          </div>
-          <div className="flex gap-1 text-base" aria-hidden="true">
-            {["🇳🇬", "🇮🇳", "🇵🇭", "🇲🇽", "🇵🇱", "🇨🇦", "🇬🇧", "🇺🇸", "🇩🇪", "🇦🇺"].map(
-              (flag) => (
-                <span key={flag}>{flag}</span>
-              )
-            )}
+        <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-civic-border pt-10 text-xs text-civic-text-secondary opacity-60 lg:flex-row">
+          <p>© {new Date().getFullYear()} VoteUp Platform. All rights reserved.</p>
+          <div className="flex gap-8">
+            <button className="hover:text-civic-indigo transition-colors uppercase font-bold tracking-widest">
+              X (Twitter)
+            </button>
+            <button className="hover:text-civic-indigo transition-colors uppercase font-bold tracking-widest">
+              LinkedIn
+            </button>
           </div>
         </div>
       </div>

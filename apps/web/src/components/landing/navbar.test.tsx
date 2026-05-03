@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-let selectedLocale: 'en' | 'hi' = 'en';
+const pushMock = vi.fn();
 
-vi.mock('@/lib/onboarding-store', () => ({
-  useOnboardingStore: (selector: (state: { selectedLocale: 'en' | 'hi' }) => unknown) =>
-    selector({ selectedLocale }),
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: pushMock,
+  }),
 }));
 
 import { Navbar } from './navbar';
@@ -18,17 +19,15 @@ describe('Navbar', () => {
     expect(screen.getByRole('link', { name: 'How it works' })).toHaveAttribute('href', '#how-it-works');
   });
 
-  it('routes sign in to localized dashboard path', () => {
-    selectedLocale = 'en';
+  it('routes primary CTA to election guide', () => {
     render(<Navbar />);
 
-    expect(screen.getByRole('link', { name: 'Sign in' })).toHaveAttribute('href', '/en/dashboard');
+    expect(screen.getByRole('link', { name: 'Open Guide' })).toHaveAttribute('href', '/election-guide');
   });
 
-  it('uses selected locale for sign-in route', () => {
-    selectedLocale = 'hi';
+  it('keeps dashboard access without login language dependency', () => {
     render(<Navbar />);
 
-    expect(screen.getByRole('link', { name: 'Sign in' })).toHaveAttribute('href', '/hi/dashboard');
+    expect(screen.getByRole('link', { name: 'Open Guide' })).toHaveAttribute('href', '/election-guide');
   });
 });

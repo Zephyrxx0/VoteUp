@@ -77,8 +77,9 @@ export function HowItWorksSection() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={PEEPS.standingWoman4}
-              alt="Illustrated character welcoming you to the onboarding flow"
-              className="absolute -bottom-16 -left-8 hidden h-[240px] w-auto drop-shadow-[6px_10px_0px_rgba(45,43,107,0.06)] lg:block"
+              alt="Illustrated character"
+              className="absolute -bottom-16 -left-8 hidden h-[240px] w-auto drop-shadow-[6px_10px_0px_rgba(45,43,107,0.1)] lg:block opacity-90 pointer-events-none"
+              style={{ filter: "brightness(1.05) saturate(0.8) sepia(0.05)" }}
               loading="lazy"
             />
           </div>
@@ -167,8 +168,9 @@ export function HowItWorksSection() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={PEEPS.sittingMan1}
-              alt="Illustrated character sitting and watching the election pipeline"
-              className="absolute -bottom-12 -right-4 hidden h-[180px] w-auto drop-shadow-[6px_10px_0px_rgba(45,43,107,0.06)] lg:block"
+              alt="Illustrated character"
+              className="absolute -bottom-12 -right-4 hidden h-[180px] w-auto drop-shadow-[6px_10px_0px_rgba(45,43,107,0.1)] lg:block opacity-85 pointer-events-none"
+              style={{ filter: "brightness(1.05) saturate(0.7) sepia(0.1)" }}
               loading="lazy"
             />
           </div>
@@ -242,8 +244,9 @@ export function HowItWorksSection() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={PEEPS.standingMan7}
-              alt="Illustrated full-body character reading about election comparisons"
-              className="h-[340px] w-auto drop-shadow-[6px_10px_0px_rgba(45,43,107,0.06)]"
+              alt="Illustrated character"
+              className="h-[340px] w-auto drop-shadow-[6px_10px_0px_rgba(45,43,107,0.12)] opacity-95 pointer-events-none"
+              style={{ filter: "brightness(1.05) saturate(0.85) sepia(0.05)" }}
               loading="lazy"
             />
             {/* Floating comparison card */}

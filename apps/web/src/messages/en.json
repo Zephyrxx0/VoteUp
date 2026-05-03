@@ -26,6 +26,103 @@
   "common": {
     "loading": "Loading...",
     "error": "Something went wrong",
-    "retry": "Try again"
+    "retry": "Try again",
+    "live": "LIVE"
+  },
+  "navbar": {
+    "howItWorks": "How it works",
+    "whoItsFor": "Who it's for",
+    "community": "Community",
+    "about": "About",
+    "openGuide": "Open Guide",
+    "liveDashboard": "Live Dashboard",
+    "language": "Language"
+  },
+  "hero": {
+    "eyebrow": "✦ Built for new citizens · Globally",
+    "headline_top": "Your new country",
+    "headline_bottom": "is having an election.",
+    "subheadline": "We'll explain every step.",
+    "lead": "VoteUp shows you the election process unfolding live — and explains every stage through the lens of the democracy you already know. From Nigeria to Canada. From India to the UK. From anywhere, to everywhere.",
+    "cta_primary": "Launch Dashboard",
+    "cta_secondary": "See how it works",
+    "social_migrants": "281M migrants worldwide",
+    "social_countries": "50+ destination countries",
+    "social_languages": "Available in 22 languages",
+    "card": {
+      "calendar": "Add to Calendar",
+      "booth": "My Booth",
+      "daysLeft": "days left",
+      "period": "Campaign Period"
+    },
+    "peep_quote": "I understand my vote now"
+  },
+  "guide": {
+    "title": "Election Guide",
+    "description": "Understand the process, timelines, and steps."
+  },
+  "guide_page": {
+    "eyebrow": "Democracy Simplified",
+    "title": "Understanding the Indian Election Process",
+    "description": "India operates the world's largest democratic exercise. Explore the journey from a single vote to the formation of the national government.",
+    "cta_timeline": "Explore the Timeline",
+    "cta_pm": "Learn about the PM",
+    "lifecycle_title": "The Election Lifecycle",
+    "lifecycle_subtitle": "Five critical steps that define the democratic transition.",
+    "ready_title": "Ready to participate?",
+    "ready_description": "Your voice matters. Track your constituency, verify your registration, and stay informed with VoteUp's interactive tools.",
+    "cta_journey": "Launch My Journey",
+    "cta_status": "Check My Status",
+    "pillars": {
+      "lok_sabha": {
+        "title": "Lok Sabha",
+        "subtitle": "The Lower House",
+        "description": "Directly elected by the people of India. It has 543 members representing specific geographical constituencies."
+      },
+      "rajya_sabha": {
+        "title": "Rajya Sabha",
+        "subtitle": "The Upper House",
+        "description": "A permanent body representing States and Union Territories. Members are indirectly elected by State MLAs."
+      },
+      "executive": {
+        "title": "The Executive",
+        "subtitle": "Prime Minister & Council",
+        "description": "The Prime Minister is appointed by the President and must command the confidence of the Lok Sabha majority."
+      }
+    },
+    "steps": {
+      "registration": {
+        "title": "Voter Registration",
+        "timeline": "Ongoing",
+        "details": "Citizens aged 18+ register via Form 6. The Electoral Roll is updated annually to ensure every eligible voice is counted."
+      },
+      "schedule": {
+        "title": "Election Schedule",
+        "timeline": "Announced by ECI",
+        "details": "The Election Commission of India (ECI) announces dates for nominations, polling, and counting. Model Code of Conduct begins."
+      },
+      "nominations": {
+        "title": "Candidate Nominations",
+        "timeline": "Phase-wise",
+        "details": "Candidates file nominations with affidavits detailing assets and criminal records. Scrutiny and withdrawals follow."
+      },
+      "polling": {
+        "title": "Polling Day",
+        "timeline": "Single/Multi-Phase",
+        "details": "Voters head to polling stations. Use of EVMs (Electronic Voting Machines) and VVPATs ensures transparency and speed."
+      },
+      "counting": {
+        "title": "Counting & Declaration",
+        "timeline": "Fixed Result Day",
+        "details": "EVMs are opened in secure counting centers. Winners are declared constituency-wise, and the final tally shapes the government."
+      }
+    }
+  },
+  "chatbot": {
+    "title": "VoteUp Assistant",
+    "status": "Online & Ready",
+    "welcome": "Namaste! I am your VoteUp Assistant. How can I help you understand the election process in India today?",
+    "placeholder": "Type your question...",
+    "disclaimer": "VoteUp AI can make mistakes. Verify with official sources."
   }
 }
