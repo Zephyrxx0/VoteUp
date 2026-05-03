@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useOnboardingStore } from "@/lib/onboarding-store";
 
 const SECTION_LINKS = [
   { label: "How it works", href: "#how-it-works" },
@@ -12,6 +13,8 @@ const SECTION_LINKS = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const selectedLocale = useOnboardingStore((state) => state.selectedLocale);
+  const signInHref = `/${selectedLocale}/dashboard`;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -65,7 +68,7 @@ export function Navbar() {
 
           {/* Sign in — desktop only */}
           <a
-            href="/dashboard"
+            href={signInHref}
             className="hidden text-sm text-civic-text-secondary transition-colors hover:text-civic-indigo lg:block"
           >
             Sign in
@@ -130,7 +133,7 @@ export function Navbar() {
               <button className="flex items-center gap-1.5 font-mono text-xs text-civic-text-secondary">
                 🌐 EN
               </button>
-              <a href="/dashboard" className="text-sm text-civic-text-secondary">
+              <a href={signInHref} className="text-sm text-civic-text-secondary">
                 Sign in
               </a>
             </div>
