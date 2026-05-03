@@ -23,6 +23,50 @@ vi.mock('@/components/checklist/ChecklistContainer', () => ({
   ),
 }));
 
+vi.mock('@/lib/stores/checklist-store', () => ({
+  useChecklistStore: (selector: (state: { items: Record<string, { completed: boolean }> }) => unknown) =>
+    selector({
+      items: {
+        's1-submit-form6': { completed: false },
+      },
+    }),
+}));
+
+const fetchCountsMock = vi.fn();
+const fetchConstituencyStatusMock = vi.fn().mockResolvedValue({
+  stage: 'Campaigning',
+  results: [],
+});
+
+vi.mock('@/lib/stores/social-pulse-store', () => ({
+  useSocialPulseStore: (selector: (state: {
+    fetchCounts: typeof fetchCountsMock;
+    fetchConstituencyStatus: typeof fetchConstituencyStatusMock;
+    error: string | null;
+  }) => unknown) =>
+    selector({
+      fetchCounts: fetchCountsMock,
+      fetchConstituencyStatus: fetchConstituencyStatusMock,
+      error: null,
+    }),
+}));
+
+vi.mock('@/components/ai-comparison/ComparisonCards', () => ({
+  ComparisonCards: () => <div data-testid="comparison-cards" />,
+}));
+
+vi.mock('@/components/social-pulse/MilestoneBadge', () => ({
+  MilestoneBadge: () => <div data-testid="milestone-badge" />,
+}));
+
+vi.mock('@/components/social-pulse/PulseCounter', () => ({
+  PulseCounter: () => <div data-testid="pulse-counter" />,
+}));
+
+vi.mock('@/components/ui/result-card', () => ({
+  ResultCard: () => <div data-testid="result-card" />,
+}));
+
 import DashboardPage from './page';
 
 describe('DashboardPage', () => {
