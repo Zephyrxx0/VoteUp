@@ -1,7 +1,9 @@
-import { doc, getDoc, serverTimestamp, setDoc, type Firestore } from 'firebase/firestore';
+import { deleteDoc, doc, getDoc, serverTimestamp, setDoc, type Firestore } from 'firebase/firestore';
 
 import { getCurrentUser } from './auth';
 import { getFirestoreDb } from './firestore-db';
+import { useChecklistStore } from './stores/checklist-store';
+import { useSocialPulseStore } from './stores/social-pulse-store';
 
 type TimestampValue = ReturnType<typeof serverTimestamp>;
 
@@ -84,4 +86,16 @@ export async function updateUserProfile(uid: string, data: UserProfileUpdate): P
     },
     { merge: true },
   );
+}
+
+export async function deleteAllUserData(uid: string): Promise<void> {
+  assertAuthorized(uid);
+
+  const db = getFirestoreDb();
+  if (db) {
+    await deleteDoc(getUsersDocRef(db, uid));
+  }
+
+  useChecklistStore.setState({ items: {} });
+  useSocialPulseStore.setState({ stageCounts: {}, error: null });
 }

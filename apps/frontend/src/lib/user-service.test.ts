@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 const docMock = vi.fn();
 const getDocMock = vi.fn();
 const setDocMock = vi.fn();
+const deleteDocMock = vi.fn();
 const serverTimestampMock = vi.fn(() => ({ __ts: true }));
 
 const getCurrentUserMock = vi.fn();
@@ -12,7 +13,23 @@ vi.mock('firebase/firestore', () => ({
   doc: (...args: unknown[]) => docMock(...args),
   getDoc: (...args: unknown[]) => getDocMock(...args),
   setDoc: (...args: unknown[]) => setDocMock(...args),
+  deleteDoc: (...args: unknown[]) => deleteDocMock(...args),
   serverTimestamp: () => serverTimestampMock(),
+}));
+
+const checklistSetStateMock = vi.fn();
+const socialPulseSetStateMock = vi.fn();
+
+vi.mock('./stores/checklist-store', () => ({
+  useChecklistStore: {
+    setState: (...args: unknown[]) => checklistSetStateMock(...args),
+  },
+}));
+
+vi.mock('./stores/social-pulse-store', () => ({
+  useSocialPulseStore: {
+    setState: (...args: unknown[]) => socialPulseSetStateMock(...args),
+  },
 }));
 
 vi.mock('./auth', () => ({
@@ -23,7 +40,7 @@ vi.mock('./firestore-db', () => ({
   getFirestoreDb: () => getFirestoreDbMock(),
 }));
 
-import { createInitialProfile, getUserProfile, updateUserProfile } from './user-service';
+import { createInitialProfile, deleteAllUserData, getUserProfile, updateUserProfile } from './user-service';
 
 describe('user-service', () => {
   beforeEach(() => {
@@ -86,5 +103,13 @@ describe('user-service', () => {
     await expect(updateUserProfile('uid-1', { badges: ['badge-1'] })).rejects.toThrow(
       'Unauthorized profile access',
     );
+  });
+
+  it('deletes cloud profile and clears local stores', async () => {
+    await deleteAllUserData('uid-1');
+
+    expect(deleteDocMock).toHaveBeenCalledWith('users/doc-ref');
+    expect(checklistSetStateMock).toHaveBeenCalledWith({ items: {} });
+    expect(socialPulseSetStateMock).toHaveBeenCalledWith({ stageCounts: {}, error: null });
   });
 });
