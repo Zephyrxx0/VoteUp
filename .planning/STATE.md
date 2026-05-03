@@ -2,12 +2,13 @@
 
 ## Current Position
 - **Phase:** 06-User-Profiles-Persistence
-- **Wave:** 1
+- **Wave:** 2
 - **Session Stopped At:** Phase 4 context gathered (Resume: .planning/phases/04-social-pulse-ai-comparison/04-CONTEXT.md)
 - **Session Stopped At:** Completed 04-01-PLAN.md (Resume: .planning/phases/04-social-pulse-ai-comparison/04-02-PLAN.md)
 - **Session Stopped At:** Completed 04-03-PLAN.md (Resume: .planning/phases/04-social-pulse-ai-comparison/04-04-PLAN.md)
 - **Session Stopped At:** Completed 06-01-PLAN.md (Resume: .planning/phases/06-User-Profiles-Persistence/06-02-PLAN.md)
 - **Session Stopped At:** Completed 06-02-PLAN.md (Resume: .planning/phases/06-User-Profiles-Persistence/06-03-PLAN.md)
+- **Session Stopped At:** Completed 06-03-PLAN.md (Resume: .planning/phases/06-User-Profiles-Persistence/06-04-PLAN.md)
 
 ## Milestone Progress
 - [x] Phase 1: Foundation (Infrastructure, Base UI)
@@ -15,7 +16,7 @@
 - [x] Phase 3: Action Layer (Planned - 4 plans in 3 waves)
 - [ ] Phase 4: Social & AI (Planned - 4 plans in 3 waves)
 - [ ] Phase 4: Social & AI (In progress - 3/4 plans complete)
-- [ ] Phase 6: User Profiles & Persistence (In progress - 2/6 plans complete)
+- [ ] Phase 6: User Profiles & Persistence (In progress - 3/6 plans complete)
 
 ## Active Decisions
 - D-02-01: GPS as primary discovery; EPIC as secondary validation (Context 02).
@@ -35,6 +36,8 @@
 - D-06-01A: Derive per-user AES-GCM keys via PBKDF2(uid + random salt, 100k iterations).
 - D-06-01B: Persist encrypted payload fields (ciphertext/iv/salt) as base64 strings.
 - D-06-02A: Enforce owner-only profile access by asserting `currentUser.uid === targetUid` before Firestore reads/writes in user service.
+- D-06-03A: Recover credential-already-in-use upgrades by signing in with recovered Google credential and union-merging history/badges.
+- D-06-03B: Surface constituency mismatches as explicit conflict payloads so UI chooses keep-cloud vs overwrite-local.
 
 ## Blockers
 - Firebase credentials needed for 02-03, 02-04
