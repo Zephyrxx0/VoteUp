@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Award, CheckCircle2, Cloud, CloudOff, Loader2, Shield } from 'lucide-react';
 
 import { UpgradePrompt } from '@/components/auth/UpgradePrompt';
+import { PrivacySettings } from '@/components/dashboard/PrivacySettings';
 import { Badge } from '@/components/ui/badge';
 import { getCurrentUser } from '@/lib/auth';
 import { getUserProfile, type UserProfile } from '@/lib/user-service';
@@ -121,6 +122,7 @@ export function ProfileView() {
       </section>
 
       <UpgradePrompt isAnonymous={isAnonymous} badgesCount={badges.length} />
+      <PrivacySettings />
     </main>
   );
 }
