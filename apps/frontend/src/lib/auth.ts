@@ -3,11 +3,14 @@ import {
   getAuth, 
   signInAnonymously, 
   onAuthStateChanged,
-  linkWithCredential,
+  linkWithPopup,
   GoogleAuthProvider,
+  signInWithCredential,
   signInWithPopup,
+  type AuthCredential,
   type User 
 } from 'firebase/auth';
+import { getUserProfile, updateUserProfile, type UserProfile } from './user-service';
 
 let auth: ReturnType<typeof getAuth> | null = null;
 
@@ -86,6 +89,106 @@ export async function linkGoogleAccount(): Promise<{ user: User | null; error: E
     return { user: result.user, error: null };
   } catch (error) {
     return { user: null, error: error as Error };
+  }
+}
+
+export type MergeResolutionChoice = 'keep-cloud' | 'overwrite-local';
+
+export interface UpgradeConflict {
+  type: 'constituency-mismatch';
+  localConstituency: string;
+  cloudConstituency: string;
+}
+
+export interface UpgradeResult {
+  user: User | null;
+  error: Error | null;
+  conflict?: UpgradeConflict;
+}
+
+function mergeUnique(values: string[] = [], incoming: string[] = []): string[] {
+  return Array.from(new Set([...values, ...incoming]));
+}
+
+function extractConstituency(profile: UserProfile | null): string | null {
+  if (!profile) return null;
+  const value = (profile as UserProfile & { constituencyId?: unknown }).constituencyId;
+  return typeof value === 'string' && value.trim().length > 0 ? value : null;
+}
+
+function mergeProfiles(localProfile: UserProfile | null, cloudProfile: UserProfile | null): Pick<UserProfile, 'history' | 'badges'> {
+  return {
+    history: mergeUnique(cloudProfile?.history, localProfile?.history),
+    badges: mergeUnique(cloudProfile?.badges, localProfile?.badges),
+  };
+}
+
+export async function upgradeToGoogle(
+  resolutionChoice: MergeResolutionChoice = 'keep-cloud',
+): Promise<UpgradeResult> {
+  const firebaseAuth = getFirebaseAuth();
+
+  if (!firebaseAuth) {
+    return { user: null, error: new Error('Firebase not configured') };
+  }
+
+  const currentUser = firebaseAuth.currentUser;
+  if (!currentUser) {
+    return { user: null, error: new Error('No authenticated user to upgrade') };
+  }
+
+  const provider = new GoogleAuthProvider();
+  const localProfile = await getUserProfile(currentUser.uid);
+
+  try {
+    const linked = await linkWithPopup(currentUser, provider);
+    return { user: linked.user, error: null };
+  } catch (caught) {
+    const error = caught as Error & { code?: string };
+    if (error.code !== 'auth/credential-already-in-use') {
+      return { user: null, error };
+    }
+
+    const credential = GoogleAuthProvider.credentialFromError(caught as { [key: string]: unknown }) as AuthCredential | null;
+    if (!credential) {
+      return { user: null, error: new Error('Unable to recover Google credential from linking error') };
+    }
+
+    const signedIn = await signInWithCredential(firebaseAuth, credential);
+    const googleUser = signedIn.user;
+    const cloudProfile = await getUserProfile(googleUser.uid);
+
+    const localConstituency = extractConstituency(localProfile);
+    const cloudConstituency = extractConstituency(cloudProfile);
+
+    if (
+      localConstituency &&
+      cloudConstituency &&
+      localConstituency !== cloudConstituency &&
+      resolutionChoice === 'keep-cloud'
+    ) {
+      return {
+        user: googleUser,
+        error: null,
+        conflict: {
+          type: 'constituency-mismatch',
+          localConstituency,
+          cloudConstituency,
+        },
+      };
+    }
+
+    const merged =
+      resolutionChoice === 'overwrite-local'
+        ? {
+            history: mergeUnique(localProfile?.history, cloudProfile?.history),
+            badges: mergeUnique(localProfile?.badges, cloudProfile?.badges),
+          }
+        : mergeProfiles(localProfile, cloudProfile);
+
+    await updateUserProfile(googleUser.uid, merged);
+
+    return { user: googleUser, error: null };
   }
 }
 
