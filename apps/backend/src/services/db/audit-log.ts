@@ -8,25 +8,38 @@ export interface AuditLogEntry {
   timestamp: string;
 }
 
-let auditDb: unknown = null;
+type FirestoreDb = import('firebase-admin/firestore').Firestore;
+let auditDb: FirestoreDb | null = null;
+
+const FIRESTORE_DISABLED_MESSAGE = '[AuditLog] Firebase not configured - skipping audit log';
+const FIRESTORE_SETUP_MESSAGE = '[AuditLog] Add Firebase credentials to enable audit logging';
 
 export function initializeAuditDb(credentials: unknown): void {
-  auditDb = credentials;
+  auditDb = (credentials as FirestoreDb) ?? null;
 }
 
-export async function writeAuditLog(entry: Omit<AuditLogEntry, 'id' | 'timestamp'>): Promise<void> {
+export async function logAction(entry: Omit<AuditLogEntry, 'id' | 'timestamp'>): Promise<void> {
   if (!auditDb) {
-    console.log('[AuditLog] Firebase not configured - skipping audit log');
+    console.log(FIRESTORE_DISABLED_MESSAGE);
+    console.log(FIRESTORE_SETUP_MESSAGE);
     return;
   }
-  
+
   const logEntry: AuditLogEntry = {
     ...entry,
     id: `${entry.targetId}-${Date.now()}`,
     timestamp: new Date().toISOString(),
   };
-  
-  console.log('[AuditLog] Would write:', logEntry);
+
+  try {
+    await auditDb.collection('audit_logs').add(logEntry);
+  } catch (error) {
+    console.error('[AuditLog] Failed to write Firestore audit log:', error);
+  }
+}
+
+export async function writeAuditLog(entry: Omit<AuditLogEntry, 'id' | 'timestamp'>): Promise<void> {
+  await logAction(entry);
 }
 
 export async function getAuditLogs(targetId: string): Promise<AuditLogEntry[]> {
