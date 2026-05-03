@@ -1,5 +1,5 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/voteup-fb/voteup-web', '-f', 'apps/web/Dockerfile', '.']
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/voteup-fb/voteup/voteup-web', '-f', 'apps/web/Dockerfile', '.']
 images:
-- 'gcr.io/voteup-fb/voteup-web'
+  - 'us-central1-docker.pkg.dev/voteup-fb/voteup/voteup-web'

@@ -16,6 +16,4 @@ WORKDIR /usr/src/app
 # For now, let's keep the simple pattern but make sure it starts.
 COPY --from=build /usr/src/app ./
 
-EXPOSE 3001
-ENV PORT 3001
-CMD [ "pnpm", "start", "--filter=api" ]
+CMD [ "pnpm", "--filter", "api", "start" ]

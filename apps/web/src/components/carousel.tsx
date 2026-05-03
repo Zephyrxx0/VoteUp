@@ -627,12 +627,7 @@ export const usePrevNextButtons = (
   }
 }
 
-type PropTypeButton = React.PropsWithChildren<
-  React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  >
->
+type PropTypeButton = React.ComponentProps<typeof Button>
 
 export const PrevButton: React.FC<PropTypeButton> = (props) => {
   const { children, ...restProps } = props
