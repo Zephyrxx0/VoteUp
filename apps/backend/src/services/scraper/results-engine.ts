@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-import { CandidateResult } from '../db/results-cache.ts';
+import type { CandidateResult } from '../db/results-cache.ts';
 
 const RESULTS_BASE_URL = 'https://results.eci.gov.in/ResultAcGenMay2026';
 const ID_PATTERN = /^S\d{4}$/;
