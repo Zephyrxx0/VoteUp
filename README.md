@@ -2,7 +2,6 @@
 
 **VoteUp** is a civic education platform designed for newly naturalized citizens. It helps people understand the election process of their new home through the lens of the democracy they already know, providing a live, personalized, and grounded guide to participating in democracy.
 
-![VoteUp Preview](https://raw.githubusercontent.com/Zephyrxx0/VoteUp/main/apps/web/public/favicon.svg)
 
 ## ✦ Key Features
 
