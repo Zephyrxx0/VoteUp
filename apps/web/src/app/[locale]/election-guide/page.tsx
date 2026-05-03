@@ -67,7 +67,7 @@ export default function ElectionGuidePage({ params }: { params: Promise<{ locale
 
   return (
     <div className="min-h-screen bg-[#FDFDFF] font-sans">
-      <Navbar locale={locale} />
+      <Navbar />
       
       <main id="main">
         {/* Hero Section */}
