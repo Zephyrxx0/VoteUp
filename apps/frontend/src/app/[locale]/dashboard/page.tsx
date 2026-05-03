@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Circle } from 'lucide-react';
 import { ChecklistContainer } from '@/components/checklist/ChecklistContainer';
@@ -155,6 +156,11 @@ export default function DashboardPage() {
   return (
     <main className="mx-auto min-h-screen max-w-4xl p-4 sm:p-6">
       <section className="mb-6 rounded-xl border bg-card p-4 sm:p-5">
+        <div className="mb-3 flex items-center justify-end">
+          <Link href="/dashboard/profile" className="text-sm text-primary underline-offset-4 hover:underline">
+            Open Profile
+          </Link>
+        </div>
         <h1 className="text-2xl font-semibold">Personalized Action Plan</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Current stage: <span className="font-medium text-foreground">{liveStage}</span>
