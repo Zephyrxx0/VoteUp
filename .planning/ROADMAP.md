@@ -43,15 +43,25 @@ Goal: Side-by-side system comparison (Gemini) and constituency pulse.
 
 **Plans:** 4 plans
 **Wave 1**
-- [ ] 04-01-PLAN.md — Social Pulse Backend
 - [x] 04-01-PLAN.md — Social Pulse Backend
 **Wave 2**
-- [ ] 04-02-PLAN.md — AI Comparison Backend
+- [x] 04-02-PLAN.md — AI Comparison Backend
 **Wave 2 (Blocked on Wave 1)**
-- [ ] 04-03-PLAN.md — Social Pulse Frontend
 - [x] 04-03-PLAN.md — Social Pulse Frontend
 **Wave 3 (Blocked on Wave 2)**
-- [ ] 04-04-PLAN.md — AI Comparison Frontend
+- [x] 04-04-PLAN.md — AI Comparison Frontend
+
+### Phase 5: Counting Day & Result Visualization
+Goal: Live election results scraping and real-time dashboard updates for Counting Day (May 4, 2026).
+**Requirements:** [RES-01, RES-02, RES-03, RES-04, RES-05]
+
+**Plans:** 3 plans
+**Wave 1**
+- [ ] 05-01-PLAN.md — Live Results Engine & Stage Logic
+**Wave 2 (Blocked on Wave 1)**
+- [ ] 05-02-PLAN.md — Counting Dashboard & Result Cards
+**Wave 3 (Blocked on Wave 1)**
+- [ ] 05-03-PLAN.md — Firebase Finalization & Polish
 
 ---
 ## Requirement Registry
@@ -67,3 +77,8 @@ Goal: Side-by-side system comparison (Gemini) and constituency pulse.
 | ACT-01 | Personalized checklist based on stage |
 | AI-01 | AI-powered home vs India system comparison |
 | SOC-01 | Social pulse and milestone badges |
+| RES-01 | Live results scraping from official ECI portal |
+| RES-02 | Time-aware stage transition (Stage 8: Counting) |
+| RES-03 | Mobile-first Result Card visualization |
+| RES-04 | Live dashboard updates with stage indicator |
+| RES-05 | Finalized Firestore sync and demo polish |
