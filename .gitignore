@@ -47,3 +47,6 @@ __pycache__/
 *.pyc
 .venv/
 openpeeps.json
+gateway.js
+deploy.ps1
+cloudbuild.yaml
